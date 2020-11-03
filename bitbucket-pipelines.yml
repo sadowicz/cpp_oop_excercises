@@ -4,6 +4,15 @@ pipelines:
   default:
     - step:
         script:
-          - gcc --version
-          - cmake --version
+          - pushd 01_platform/04_tests/
+          - git clone --depth=1 --branch=release-1.10.0 https://github.com/google/googletest.git
+          - rm -rf googletest/.git
+          - pushd googletest && mkdir build && pushd build
+          - cmake ../ && make -j4
+          - popd && popd
+          - pushd project && mkdir build && pushd build
+          - cmake ../ && make -j4
+          - tests/tests --gtest_output=xml
+          - popd && popd
+          - popd
           - .ci/collect_reports.sh
