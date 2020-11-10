@@ -1,9 +1,61 @@
 #include "TextWrap.h"
 #include <gtest/gtest.h>
 
+class TextWrapTest : public ::testing::Test {
+public:
+
+    void SetUp() override {
+        Test::SetUp();
+    }
+
+    void TearDown() override {
+        Test::TearDown();
+    }
+
+    TextWrap textWrap{};
+};
+
+// test fixture
+
+TEST_F(TextWrapTest, Foo) {
+
+    textWrap.wrap("a");
+}
+
 TEST(TextWrap, Constructor) {
 
     TextWrap textWrap{};
 }
 
-// TODO: ...
+TEST(TextWrap, Constructor_PassNumberOfColumnsThroughTheConstructor) {
+
+    TextWrap textWrap{2};
+}
+
+TEST(TextWrap, Wrap_OneChraterInOneColumn) {
+
+    TextWrap textWrap{1};
+
+    EXPECT_EQ("a", textWrap.wrap("a"));
+}
+
+TEST(TextWrap, Wrap_OneChraterInOneColumn_OtherCharacter) {
+
+    TextWrap textWrap{1};
+
+    EXPECT_EQ("b", textWrap.wrap("b"));
+}
+
+TEST(TextWrap, Wrap_TwoChraterInOneColumn) {
+
+    TextWrap textWrap{1};
+
+    EXPECT_EQ("a\nb", textWrap.wrap("ab"));
+}
+
+TEST(TextWrap, Wrap_FourChraterInTwoColumn) {
+
+    TextWrap textWrap{2};
+
+    EXPECT_EQ("ab\ncd", textWrap.wrap("abcd"));
+}
