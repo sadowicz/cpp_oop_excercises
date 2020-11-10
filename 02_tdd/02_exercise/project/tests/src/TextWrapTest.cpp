@@ -59,3 +59,8 @@ TEST(TextWrap, Wrap_FourChraterInTwoColumn) {
 
     EXPECT_EQ("ab\ncd", textWrap.wrap("abcd"));
 }
+
+TEST(TextWrap, Wrap_ThreeCharacterInOneColumn) {
+    TextWrap textWrap{1};
+    EXPECT_EQ("a\nb\nc", textWrap.wrap("abc"));
+}
