@@ -4,7 +4,7 @@ pipelines:
   default:
     - step:
         script:
-          - pushd 01_platform/04_tests/
+          - pushd 02_tdd/02_exercise/
           - git clone --depth=1 --branch=release-1.10.0 https://github.com/google/googletest.git
           - rm -rf googletest/.git
           - pushd googletest && mkdir build && pushd build
