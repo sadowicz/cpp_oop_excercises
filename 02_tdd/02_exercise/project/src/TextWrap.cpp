@@ -10,7 +10,14 @@ std::string TextWrap::wrap(const std::string& line) const {
         std::string result;
 
         for(int i = 0; i < line.size(); i += columns) {
-            result += line.substr(i, columns) + ((i < line.size() - columns) ? "\n" : "");
+            result += line.substr(i, columns);
+
+            if(result.back() == ' ') {
+                result.back() = '\n';
+            }
+            else {
+                result += (i < line.size() - columns) ? "\n" : "";
+            }
         }
 
         return result;
