@@ -74,3 +74,8 @@ TEST(TextWrap, Wrap_DeleteSpaceWhenItsAtLineBegginning) {
     TextWrap textWrap{4};
     EXPECT_EQ("abcd\nefgh", textWrap.wrap("abcd efgh"));
 }
+
+TEST(TextWrap, Wrap_DeleteSpaceWhenItsAtLineBegginningThreeLines) {
+    TextWrap textWrap{4};
+    EXPECT_EQ("abcd\nefgh\nijkl", textWrap.wrap("abcd efgh ijkl"));
+}
