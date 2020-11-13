@@ -12,5 +12,5 @@ public:
 private:
     int columns;
 
-    std::string createWrappedLine(std::string lineSubstring, bool isLastLine) const;
+    std::string createWrappedLine(const std::string& line, int& substrStartIndex) const;
 };

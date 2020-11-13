@@ -10,7 +10,7 @@ std::string TextWrap::wrap(const std::string& line) const {
         std::string result;
 
         for(int i = 0; i < line.size(); i += columns) {
-            result += createWrappedLine(line.substr(i, columns), (i < line.size() - columns));
+            result += createWrappedLine(line, i);
         }
 
         return result;
@@ -19,15 +19,22 @@ std::string TextWrap::wrap(const std::string& line) const {
     return line;
 }
 
-std::string TextWrap::createWrappedLine(std::string lineSubstring, bool isLastLine) const {
+std::string TextWrap::createWrappedLine(const std::string& line, int& substrStartIndex) const {
+
+    std::string lineSubstring = line.substr(substrStartIndex, columns);
+
     if(lineSubstring.front() == ' '){
         lineSubstring.erase(0,1);
+        lineSubstring.push_back(line[substrStartIndex + columns]);
+        substrStartIndex++;
     }
-    else if(lineSubstring.back() == ' ') {
+
+    if(lineSubstring.back() == ' ') {
         lineSubstring.back() = '\n';
     }
     else {
-        lineSubstring += (isLastLine) ? "\n" : "";
+        lineSubstring += (substrStartIndex < line.size() - columns) ? "\n" : "";
     }
+
     return lineSubstring;
 }
