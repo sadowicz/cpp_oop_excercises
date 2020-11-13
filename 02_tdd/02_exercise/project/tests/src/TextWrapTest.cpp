@@ -65,7 +65,12 @@ TEST(TextWrap, Wrap_ThreeCharacterInOneColumn) {
     EXPECT_EQ("a\nb\nc", textWrap.wrap("abc"));
 }
 
-TEST(TextWrap, Wrap_SpaceToNewLineWhenItsAtLineAnd) {
+TEST(TextWrap, Wrap_SpaceToNewLineWhenItsAtLineEnd) {
     TextWrap textWrap{3};
     EXPECT_EQ("ab\ncde", textWrap.wrap("ab cde"));
+}
+
+TEST(TextWrap, Wrap_DeleteSpaceWhenItsAtLineBegginning) {
+    TextWrap textWrap{4};
+    EXPECT_EQ("abcd\nefgh", textWrap.wrap("abcd efgh"));
 }
