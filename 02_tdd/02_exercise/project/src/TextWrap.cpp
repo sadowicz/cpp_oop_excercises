@@ -25,8 +25,11 @@ std::string TextWrap::createWrappedLine(const std::string& line, int& substrStar
 
     if(lineSubstring.front() == ' '){
         lineSubstring.erase(0,1);
-        lineSubstring.push_back(line[substrStartIndex + columns]);
-        substrStartIndex++;
+
+        if(substrStartIndex < line.size() - columns) {
+            lineSubstring.push_back(line[substrStartIndex + columns]);
+            substrStartIndex++;
+        }
     }
 
     if(lineSubstring.back() == ' ') {
