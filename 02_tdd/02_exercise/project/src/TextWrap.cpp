@@ -20,7 +20,10 @@ std::string TextWrap::wrap(const std::string& line) const {
 }
 
 std::string TextWrap::createWrappedLine(std::string lineSubstring, bool isLastLine) const {
-    if(lineSubstring.back() == ' ') {
+    if(lineSubstring.front() == ' '){
+        lineSubstring.erase(0,1);
+    }
+    else if(lineSubstring.back() == ' ') {
         lineSubstring.back() = '\n';
     }
     else {
