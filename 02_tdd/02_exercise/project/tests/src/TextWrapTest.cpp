@@ -84,3 +84,8 @@ TEST(TextWrap, Wrap_LastLineBegginningWithSpace) {
     TextWrap textWrap{3};
     EXPECT_EQ("abc\nde", textWrap.wrap("abc de"));
 }
+
+TEST(TextWrap, Wrap_MoveWordExceedingLineToNewLine) {
+    TextWrap textWrap{6};
+    EXPECT_EQ("abc\ndef", textWrap.wrap("abc def"));
+}
