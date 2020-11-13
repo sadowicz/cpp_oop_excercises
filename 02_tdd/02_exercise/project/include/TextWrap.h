@@ -13,4 +13,5 @@ private:
     int columns;
 
     std::string createWrappedLine(const std::string& line, int& substrStartIndex) const;
+    bool isLastLine(const std::string& line, int substrStartIndex) const;
 };

@@ -26,7 +26,7 @@ std::string TextWrap::createWrappedLine(const std::string& line, int& substrStar
     if(lineSubstring.front() == ' '){
         lineSubstring.erase(0,1);
 
-        if(substrStartIndex < line.size() - columns) {
+        if(!isLastLine(line, substrStartIndex)) {
             lineSubstring.push_back(line[substrStartIndex + columns]);
             substrStartIndex++;
         }
@@ -36,8 +36,12 @@ std::string TextWrap::createWrappedLine(const std::string& line, int& substrStar
         lineSubstring.back() = '\n';
     }
     else {
-        lineSubstring += (substrStartIndex < line.size() - columns) ? "\n" : "";
+        lineSubstring += (!isLastLine(line, substrStartIndex)) ? "\n" : "";
     }
 
     return lineSubstring;
+}
+
+bool TextWrap::isLastLine(const std::string& line, int substrStartIndex) const {
+    return (substrStartIndex >= line.size() - columns);
 }
