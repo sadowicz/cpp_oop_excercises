@@ -10,18 +10,21 @@ std::string TextWrap::wrap(const std::string& line) const {
         std::string result;
 
         for(int i = 0; i < line.size(); i += columns) {
-            result += line.substr(i, columns);
-
-            if(result.back() == ' ') {
-                result.back() = '\n';
-            }
-            else {
-                result += (i < line.size() - columns) ? "\n" : "";
-            }
+            result += createWrappedLine(line.substr(i, columns), (i < line.size() - columns));
         }
 
         return result;
     }
 
     return line;
+}
+
+std::string TextWrap::createWrappedLine(std::string lineSubstring, bool isLastLine) const {
+    if(lineSubstring.back() == ' ') {
+        lineSubstring.back() = '\n';
+    }
+    else {
+        lineSubstring += (isLastLine) ? "\n" : "";
+    }
+    return lineSubstring;
 }
