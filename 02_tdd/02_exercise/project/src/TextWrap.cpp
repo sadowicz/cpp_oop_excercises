@@ -2,7 +2,7 @@
 
 TextWrap::TextWrap(int columns) : columns(columns) {
     if(!this->columns) {
-        throw std::invalid_argument{""};
+        throw std::invalid_argument{"Zero passed as columns."};
     }
 }
 
