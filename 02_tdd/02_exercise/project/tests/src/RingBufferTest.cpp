@@ -6,4 +6,6 @@ TEST(RingBuffer, Constructor) {
     RingBuffer ringBuffer{};
 }
 
-// TODO: ...
+TEST(RingBuffer, Constructor_PassCapacityThroughConstructor) {
+    RingBuffer ringBuffer{5};
+}
