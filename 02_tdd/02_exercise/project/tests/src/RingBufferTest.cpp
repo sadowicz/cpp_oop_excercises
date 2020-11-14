@@ -26,3 +26,11 @@ TEST(RingBuffer, Add_AddingElementIncrementsSize) {
 
     EXPECT_EQ(1, ringBuffer.size());
 }
+
+TEST(RingBuffer, Add_AddingElementIncrementsSizeTwoElements) {
+    RingBuffer ringBuffer{3};
+    ringBuffer.add(2);
+    ringBuffer.add(3);
+
+    EXPECT_EQ(2, ringBuffer.size());
+}
