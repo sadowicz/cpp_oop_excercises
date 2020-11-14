@@ -10,6 +10,10 @@ TEST(RingBuffer, Constructor_PassCapacityThroughConstructor) {
     RingBuffer ringBuffer{5};
 }
 
+TEST(RingBuffer, Constructor_ThrowsExceptionWhenPassingZeroCapacity) {
+    EXPECT_THROW(RingBuffer ringBuffer{0}, std::invalid_argument);
+}
+
 TEST(RingBuffer, Capacity_ReturnRingBufferCapacity) {
     RingBuffer ringBuffer{5};
     EXPECT_EQ(5, ringBuffer.capacity());
