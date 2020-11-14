@@ -4,10 +4,10 @@ RingBuffer::RingBuffer(unsigned int capacity) : _capacity{capacity}, _size{} {
 
 }
 
-void RingBuffer::add(int) {
+void RingBuffer::add(int element) {
     _size++;
 }
 
-void RingBuffer::remove() {
+int RingBuffer::remove() {
 
 }

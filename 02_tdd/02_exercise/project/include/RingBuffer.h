@@ -5,8 +5,8 @@ class RingBuffer {
 public:
     explicit RingBuffer(unsigned int capacity = 1);
 
-    void add(int);
-    void remove();
+    void add(int element);
+    int remove();
 
     unsigned int capacity() const { return _capacity; }
     unsigned int size() const { return _size; }
