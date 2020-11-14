@@ -39,3 +39,8 @@ TEST(RingBuffer, Remove) {
     RingBuffer ringBuffer{2};
     ringBuffer.remove();
 }
+
+TEST(RingBuffer, Remove_ThrowExceptionWhenSizeIsZero) {
+    RingBuffer ringBuffer{2};
+    EXPECT_THROW(ringBuffer.remove(), std::out_of_range);
+}
