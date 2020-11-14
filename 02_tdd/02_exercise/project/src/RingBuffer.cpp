@@ -1,3 +1,5 @@
 #include "RingBuffer.h"
 
-// TODO: ...
+RingBuffer::RingBuffer(unsigned int capacity) : capacity{capacity} {
+
+}
