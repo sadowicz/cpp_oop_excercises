@@ -9,3 +9,8 @@ TEST(RingBuffer, Constructor) {
 TEST(RingBuffer, Constructor_PassCapacityThroughConstructor) {
     RingBuffer ringBuffer{5};
 }
+
+TEST(RingBuffer, Add) {
+    RingBuffer ringBuffer{2};
+    ringBuffer.add();
+}
