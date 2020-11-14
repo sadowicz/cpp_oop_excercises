@@ -10,4 +10,7 @@ void RingBuffer::add(int element) {
 
 int RingBuffer::remove() {
 
+    if(!size()) {
+        throw std::out_of_range{""};
+    }
 }

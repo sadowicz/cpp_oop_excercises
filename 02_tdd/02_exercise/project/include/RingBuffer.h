@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdexcept>
+
 class RingBuffer {
 
 public:

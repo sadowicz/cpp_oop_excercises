@@ -37,6 +37,7 @@ TEST(RingBuffer, Add_AddingElementIncrementsSizeTwoElements) {
 
 TEST(RingBuffer, Remove) {
     RingBuffer ringBuffer{2};
+    ringBuffer.add(1);
     ringBuffer.remove();
 }
 
