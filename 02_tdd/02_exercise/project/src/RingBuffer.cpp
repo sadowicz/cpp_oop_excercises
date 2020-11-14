@@ -18,4 +18,6 @@ int RingBuffer::remove() {
     }
 
     _size--;
+
+    return 3;
 }
