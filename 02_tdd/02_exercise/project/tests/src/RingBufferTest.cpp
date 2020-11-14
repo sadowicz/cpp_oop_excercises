@@ -68,3 +68,12 @@ TEST(RingBuffer, Remove_ThrownExceptionHasValidMessage) {
         EXPECT_STREQ("Removing from zero size buffer.", zeroSizRemoveExcpt.what());
     }
 }
+
+TEST(RingBuffer, Remove_RemovingElementDecrementsSize) {
+    RingBuffer ringBuffer{2};
+    ringBuffer.add(1);
+    ringBuffer.add(2);
+    ringBuffer.remove();
+
+    EXPECT_EQ(1, ringBuffer.size());
+}
