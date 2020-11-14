@@ -32,6 +32,27 @@ std::string TextWrap::createWrappedLine(const std::string& line, int& substrStar
         }
     }
 
+    int lastWordStartSubstr = lineSubstring.find_last_of(' '); // space before last word index in substring
+    int lastWordEndLine;
+
+    if(lastWordStartSubstr != std::string::npos) {
+        int lastWordStartLine = lastWordStartSubstr + substrStartIndex + 1; // last word first letter index in line string
+        lastWordEndLine = line.find_first_of(' ', lastWordStartLine); // space after last word index in line string
+
+        if(lastWordEndLine != std::string::npos) {
+            lastWordEndLine--;  // last word last letter index in line string
+        }
+        else {
+            lastWordEndLine = static_cast<int>(line.length()) - 1; // last index of line string because no spaces in line
+        }
+
+        if(lastWordEndLine >= substrStartIndex + columns) {
+            int oldSubstrLen = lineSubstring.length();
+            lineSubstring = line.substr(substrStartIndex, lastWordStartSubstr); // substr end before last space of old substr
+            substrStartIndex -= static_cast<int>(oldSubstrLen - lineSubstring.length());
+        }
+    }
+
     if(lineSubstring.back() == ' ') {
         lineSubstring.back() = '\n';
     }
@@ -43,5 +64,5 @@ std::string TextWrap::createWrappedLine(const std::string& line, int& substrStar
 }
 
 bool TextWrap::isLastLine(const std::string& line, int substrStartIndex) const {
-    return (substrStartIndex >= line.size() - columns);
+    return (substrStartIndex >= static_cast<int>(line.length()) - columns);
 }
