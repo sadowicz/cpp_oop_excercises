@@ -1,7 +1,9 @@
 #include "RingBuffer.h"
 
 RingBuffer::RingBuffer(unsigned int capacity) : _capacity{capacity}, _size{} {
-
+    if(!this->capacity()) {
+        throw std::invalid_argument{""};
+    }
 }
 
 void RingBuffer::add(int element) {
