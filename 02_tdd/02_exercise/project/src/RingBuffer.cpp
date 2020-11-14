@@ -1,9 +1,9 @@
 #include "RingBuffer.h"
 
-RingBuffer::RingBuffer(unsigned int capacity) : _capacity{capacity} {
+RingBuffer::RingBuffer(unsigned int capacity) : _capacity{capacity}, _size{} {
 
 }
 
 void RingBuffer::add(int) {
-    _size = 1;
+    _size++;
 }
