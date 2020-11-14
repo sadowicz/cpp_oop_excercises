@@ -45,3 +45,13 @@ TEST(RingBuffer, Remove_ThrowExceptionWhenSizeIsZero) {
     RingBuffer ringBuffer{2};
     EXPECT_THROW(ringBuffer.remove(), std::out_of_range);
 }
+
+TEST(RingBuffer, Remove_ThrownExceptionHasValidMessage) {
+    RingBuffer ringBuffer{4};
+    try {
+        ringBuffer.remove();
+    }
+    catch(std::out_of_range& zeroSizRemoveExcpt) {
+        EXPECT_STREQ("Removing from zero size buffer.", zeroSizRemoveExcpt.what());
+    }
+}
