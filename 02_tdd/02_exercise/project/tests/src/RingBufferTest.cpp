@@ -12,5 +12,5 @@ TEST(RingBuffer, Constructor_PassCapacityThroughConstructor) {
 
 TEST(RingBuffer, Add) {
     RingBuffer ringBuffer{2};
-    ringBuffer.add();
+    ringBuffer.add(1);
 }
