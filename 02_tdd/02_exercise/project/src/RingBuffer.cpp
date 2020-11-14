@@ -16,4 +16,6 @@ int RingBuffer::remove() {
     if(!size()) {
         throw std::out_of_range{"Removing from zero size buffer."};
     }
+
+    _size--;
 }
