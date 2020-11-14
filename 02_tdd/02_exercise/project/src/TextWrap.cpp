@@ -53,8 +53,8 @@ std::string TextWrap::createWrappedLine(const std::string& line, int& substrStar
         }
     }
 
-    if(lineSubstring.back() == ' ') {
-        lineSubstring.back() = '\n';
+    if(isLastLine(lineSubstring, substrStartIndex) && lineSubstring.back() == ' ') {
+        lineSubstring.pop_back();
     }
     else {
         lineSubstring += (!isLastLine(line, substrStartIndex)) ? "\n" : "";
