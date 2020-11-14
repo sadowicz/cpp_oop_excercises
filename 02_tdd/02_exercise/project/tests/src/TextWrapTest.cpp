@@ -36,6 +36,15 @@ TEST(TextWrap, Constructor_ThrowExceptionWhenZeroPassed) {
     EXPECT_THROW(TextWrap textWrap{0}, std::invalid_argument);
 }
 
+TEST(TextWrap, Constructor_ThrownExceptionHasValidMessage) {
+    try {
+        TextWrap textWrap{0};
+    }
+    catch(std::invalid_argument& invArgExcpt) {
+        EXPECT_STREQ("Zero passed as columns.", invArgExcpt.what());
+    }
+}
+
 TEST(TextWrap, Wrap_OneChraterInOneColumn) {
 
     TextWrap textWrap{1};
