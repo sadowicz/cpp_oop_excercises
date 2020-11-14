@@ -19,3 +19,10 @@ TEST(RingBuffer, Add) {
     RingBuffer ringBuffer{2};
     ringBuffer.add(1);
 }
+
+TEST(RingBuffer, Add_AddingElementIncrementsSize) {
+    RingBuffer ringBuffer{3};
+    ringBuffer.add(2);
+
+    EXPECT_EQ(1, ringBuffer.size());
+}
