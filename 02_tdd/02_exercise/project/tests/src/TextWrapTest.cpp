@@ -32,6 +32,10 @@ TEST(TextWrap, Constructor_PassNumberOfColumnsThroughTheConstructor) {
     TextWrap textWrap{2};
 }
 
+TEST(TextWrap, Constructor_ThrowExceptionWhenZeroPassed) {
+    EXPECT_THROW(TextWrap textWrap{0}, std::invalid_argument);
+}
+
 TEST(TextWrap, Wrap_OneChraterInOneColumn) {
 
     TextWrap textWrap{1};
