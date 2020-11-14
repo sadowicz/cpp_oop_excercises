@@ -7,6 +7,8 @@ public:
 
     void add(int);
 
+    unsigned int capacity() const { return _capacity; }
+
 private:
-    unsigned int capacity;
+    unsigned int _capacity;
 };

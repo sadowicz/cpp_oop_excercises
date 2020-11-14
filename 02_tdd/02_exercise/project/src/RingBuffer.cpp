@@ -1,6 +1,6 @@
 #include "RingBuffer.h"
 
-RingBuffer::RingBuffer(unsigned int capacity) : capacity{capacity} {
+RingBuffer::RingBuffer(unsigned int capacity) : _capacity{capacity} {
 
 }
 
