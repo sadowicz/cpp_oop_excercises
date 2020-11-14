@@ -14,6 +14,15 @@ TEST(RingBuffer, Constructor_ThrowsExceptionWhenPassingZeroCapacity) {
     EXPECT_THROW(RingBuffer ringBuffer{0}, std::invalid_argument);
 }
 
+TEST(RingBuffer, Constructor_ThrownExceptionHasValidMessage) {
+    try {
+        RingBuffer ringBuffer{0};
+    }
+    catch(std::invalid_argument& zeroCapacityExcpt) {
+        EXPECT_STREQ("Zero passed as capacity.", zeroCapacityExcpt.what());
+    }
+}
+
 TEST(RingBuffer, Capacity_ReturnRingBufferCapacity) {
     RingBuffer ringBuffer{5};
     EXPECT_EQ(5, ringBuffer.capacity());
