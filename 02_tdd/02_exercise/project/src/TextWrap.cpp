@@ -1,7 +1,9 @@
 #include "TextWrap.h"
 
 TextWrap::TextWrap(int columns) : columns(columns) {
-
+    if(!this->columns) {
+        throw std::invalid_argument{""};
+    }
 }
 
 std::string TextWrap::wrap(const std::string& line) const {
