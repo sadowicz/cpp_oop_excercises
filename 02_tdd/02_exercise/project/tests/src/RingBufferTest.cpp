@@ -34,3 +34,8 @@ TEST(RingBuffer, Add_AddingElementIncrementsSizeTwoElements) {
 
     EXPECT_EQ(2, ringBuffer.size());
 }
+
+TEST(RingBuffer, Remove) {
+    RingBuffer ringBuffer{2};
+    ringBuffer.remove();
+}
