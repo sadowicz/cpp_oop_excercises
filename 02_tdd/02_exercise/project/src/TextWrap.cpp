@@ -34,6 +34,20 @@ std::string TextWrap::createWrappedLine(const std::string& line, int& substrStar
         }
     }
 
+    wordShrinkLine(line, lineSubstring, substrStartIndex);
+
+    if(isLastLine(lineSubstring, substrStartIndex) && lineSubstring.back() == ' ') {
+        lineSubstring.pop_back();
+    }
+    else {
+        lineSubstring += (!isLastLine(line, substrStartIndex)) ? "\n" : "";
+    }
+
+    return lineSubstring;
+}
+
+void TextWrap::wordShrinkLine(const std::string& line, std::string& lineSubstring, int& substrStartIndex) const {
+
     int lastWordStartSubstr = lineSubstring.find_last_of(' '); // space before last word index in substring
     int lastWordEndLine;
 
@@ -54,15 +68,6 @@ std::string TextWrap::createWrappedLine(const std::string& line, int& substrStar
             substrStartIndex -= static_cast<int>(oldSubstrLen - lineSubstring.length());
         }
     }
-
-    if(isLastLine(lineSubstring, substrStartIndex) && lineSubstring.back() == ' ') {
-        lineSubstring.pop_back();
-    }
-    else {
-        lineSubstring += (!isLastLine(line, substrStartIndex)) ? "\n" : "";
-    }
-
-    return lineSubstring;
 }
 
 bool TextWrap::isLastLine(const std::string& line, int substrStartIndex) const {

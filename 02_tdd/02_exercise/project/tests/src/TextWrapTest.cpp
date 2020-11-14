@@ -1,27 +1,6 @@
 #include "TextWrap.h"
 #include <gtest/gtest.h>
 
-class TextWrapTest : public ::testing::Test {
-public:
-
-    void SetUp() override {
-        Test::SetUp();
-    }
-
-    void TearDown() override {
-        Test::TearDown();
-    }
-
-    TextWrap textWrap{};
-};
-
-// test fixture
-
-TEST_F(TextWrapTest, Foo) {
-
-    textWrap.wrap("a");
-}
-
 TEST(TextWrap, Constructor) {
 
     TextWrap textWrap{};
