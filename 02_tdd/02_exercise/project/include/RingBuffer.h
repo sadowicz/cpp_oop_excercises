@@ -3,7 +3,7 @@
 #include <stdexcept>
 
 class RingBuffer {
-
+    friend class RingBufferTest;
 public:
     explicit RingBuffer(unsigned int capacity = 1);
     ~RingBuffer();

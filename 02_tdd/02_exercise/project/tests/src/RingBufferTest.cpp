@@ -1,6 +1,26 @@
 #include "RingBuffer.h"
 #include <gtest/gtest.h>
 
+class RingBufferTest : public ::testing::Test {
+
+protected:
+    void SetUp() override { Test::SetUp(); }
+    void TearDown() override { Test::TearDown(); }
+
+    int writeIndex() const { return ringBuffer._writeIndex; }
+
+    RingBuffer ringBuffer{2};
+};
+
+TEST_F(RingBufferTest, AddingElementsDoNotIncrementWriteIndexAboveLastDataArrayIndex) {
+    //ringBuffer = RingBuffer{2};
+    ringBuffer.add(1);
+    ringBuffer.add(2);
+    ringBuffer.add(3);
+
+    EXPECT_LT(writeIndex(), ringBuffer.capacity());
+}
+
 TEST(RingBuffer, Constructor) {
 
     RingBuffer ringBuffer{};
