@@ -16,7 +16,8 @@ RingBuffer::~RingBuffer() {
 
 void RingBuffer::add(int element) {
 
-    _data[_writeIndex++] = element;
+    _data[_writeIndex] = element;
+    _writeIndex = (_writeIndex + 1) % capacity();
     _readIndex += (size() == capacity());
 
     _size += (size() < capacity());
