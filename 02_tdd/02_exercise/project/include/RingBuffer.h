@@ -17,6 +17,6 @@ private:
     unsigned int _capacity;
     unsigned int _size;
     int _data[2];
-    int* _startPtr;
-    int* _endPtr;
+    int* _readPtr;
+    int* _writePtr;
 };
