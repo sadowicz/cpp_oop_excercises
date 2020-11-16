@@ -158,3 +158,15 @@ TEST(RingBuffer, Remove_RemovingElementsReturnsRemovedElementsCapacityElements) 
     for(int i = 0; i < ringBuffer.capacity(); i++)
         EXPECT_EQ(i + 1, ringBuffer.remove());
 }
+
+TEST(RingBuffer, Remove_RemovingElementsFromAboveCapacityDoNotIncrementReadIndexAboveLastDataArrayIndex) {
+    RingBuffer ringBuffer{3};
+
+    for(int i = 0; i < ringBuffer.capacity() + 2; i++) {
+        ringBuffer.add(i + 1);
+    }
+
+    EXPECT_EQ(3, ringBuffer.remove());
+    EXPECT_EQ(4, ringBuffer.remove());
+    EXPECT_EQ(5, ringBuffer.remove());
+}
