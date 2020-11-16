@@ -14,7 +14,7 @@ protected:
 };
 
 TEST_F(RingBufferTest, AddingElementsDoNotIncrementWriteIndexAboveLastDataArrayIndex) {
-    //ringBuffer = RingBuffer{2};
+
     ringBuffer.add(1);
     ringBuffer.add(2);
     ringBuffer.add(3);
