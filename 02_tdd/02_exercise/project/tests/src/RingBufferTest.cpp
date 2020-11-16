@@ -91,3 +91,12 @@ TEST(RingBuffer, Remove_RemovingElementReturnsRemovedElementAnotherElement) {
 
     EXPECT_EQ(2, ringBuffer.remove());
 }
+
+TEST(RingBuffer, Remove_RemovingElementsReturnsRemovedElementsTwoElements) {
+    RingBuffer ringBuffer{2};
+    ringBuffer.add(2);
+    ringBuffer.add(4);
+
+    EXPECT_EQ(2, ringBuffer.remove());
+    EXPECT_EQ(4, ringBuffer.remove());
+}
