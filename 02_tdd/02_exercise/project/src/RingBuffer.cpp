@@ -11,6 +11,11 @@ RingBuffer::RingBuffer(unsigned int capacity) : _capacity{capacity}, _size{} {
     _writePtr = _data;
 }
 
+RingBuffer::~RingBuffer() {
+
+    delete [] _data;
+}
+
 void RingBuffer::add(int element) {
 
     *_writePtr++ = element;

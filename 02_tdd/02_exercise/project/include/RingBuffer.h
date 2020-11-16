@@ -6,6 +6,7 @@ class RingBuffer {
 
 public:
     explicit RingBuffer(unsigned int capacity = 1);
+    ~RingBuffer();
 
     void add(int element);
     int remove();
