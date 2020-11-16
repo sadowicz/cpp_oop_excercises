@@ -1,14 +1,12 @@
 #include "RingBuffer.h"
 
-RingBuffer::RingBuffer(unsigned int capacity) : _capacity{capacity}, _size{} {
+RingBuffer::RingBuffer(unsigned int capacity) : _capacity{capacity}, _size{}, _readIndex{}, _writeIndex{} {
 
     if(!this->capacity()) {
         throw std::invalid_argument{"Zero passed as capacity."};
     }
 
     _data = new int[this->capacity()];
-    _readPtr = _data;
-    _writePtr = _data;
 }
 
 RingBuffer::~RingBuffer() {
@@ -18,8 +16,8 @@ RingBuffer::~RingBuffer() {
 
 void RingBuffer::add(int element) {
 
-    *_writePtr++ = element;
-    _readPtr += (size() == capacity());
+    _data[_writeIndex++] = element;
+    _readIndex += (size() == capacity());
 
     _size += (size() < capacity());
 }
@@ -32,5 +30,5 @@ int RingBuffer::remove() {
 
     _size--;
 
-    return *_readPtr++;
+    return _data[_readIndex++];
 }
