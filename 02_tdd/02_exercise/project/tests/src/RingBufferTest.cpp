@@ -8,6 +8,7 @@ protected:
     void TearDown() override { Test::TearDown(); }
 
     unsigned int writeIndex() const { return ringBuffer._writeIndex; }
+    unsigned int readIndex() const { return ringBuffer._readIndex; }
 
     RingBuffer ringBuffer{2};
 };
@@ -19,6 +20,16 @@ TEST_F(RingBufferTest, AddingElementsDoNotIncrementWriteIndexAboveLastDataArrayI
     ringBuffer.add(3);
 
     EXPECT_LT(writeIndex(), ringBuffer.capacity());
+}
+
+TEST_F(RingBufferTest, AddingElementsDoNotIncrementReadIndexAboveLastDataArrayIndex) {
+
+    ringBuffer.add(1);
+    ringBuffer.add(2);
+    ringBuffer.add(3);
+    ringBuffer.add(4);
+
+    EXPECT_LT(readIndex(), ringBuffer.capacity());
 }
 
 TEST(RingBuffer, Constructor) {
