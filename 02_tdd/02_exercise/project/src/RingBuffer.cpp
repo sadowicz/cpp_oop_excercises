@@ -19,9 +19,7 @@ RingBuffer::~RingBuffer() {
 void RingBuffer::add(int element) {
 
     *_writePtr++ = element;
-    if(size() < capacity()) {
-        _size++;
-    }
+    _size += (size() < capacity());
 }
 
 int RingBuffer::remove() {
