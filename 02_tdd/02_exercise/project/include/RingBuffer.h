@@ -18,6 +18,6 @@ private:
     unsigned int _capacity;
     unsigned int _size;
     int* _data;
-    int _readIndex;
-    int _writeIndex;
+    unsigned int _readIndex;
+    unsigned int _writeIndex;
 };

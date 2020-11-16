@@ -7,7 +7,7 @@ protected:
     void SetUp() override { Test::SetUp(); }
     void TearDown() override { Test::TearDown(); }
 
-    int writeIndex() const { return ringBuffer._writeIndex; }
+    unsigned int writeIndex() const { return ringBuffer._writeIndex; }
 
     RingBuffer ringBuffer{2};
 };
