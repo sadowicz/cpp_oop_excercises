@@ -29,7 +29,10 @@ int RingBuffer::remove() {
         throw std::out_of_range{"Removing from zero size buffer."};
     }
 
+    int element = _data[_readIndex];
+    _readIndex = (_readIndex + 1) % capacity();
+
     _size--;
 
-    return _data[_readIndex++];
+    return element;
 }
