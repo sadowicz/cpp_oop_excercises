@@ -56,6 +56,15 @@ TEST(RingBuffer, Add_AddingElementsDoNotIncrementSizeWhenItEqualsCapacity) {
     EXPECT_EQ(1, ringBuffer.size());
 }
 
+TEST(RingBuffer, Add_AddingElementAboveCapacityMovesReadPointerToNextOldest) {
+    RingBuffer ringBuffer{2};
+    ringBuffer.add(3);
+    ringBuffer.add(8);
+    ringBuffer.add(9);
+
+    EXPECT_EQ(8, ringBuffer.remove());
+}
+
 TEST(RingBuffer, Remove) {
     RingBuffer ringBuffer{2};
     ringBuffer.add(1);
