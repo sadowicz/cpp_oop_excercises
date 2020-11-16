@@ -48,6 +48,14 @@ TEST(RingBuffer, Add_AddingElementIncrementsSizeTwoElements) {
     EXPECT_EQ(2, ringBuffer.size());
 }
 
+TEST(RingBuffer, Add_AddingElementsDoNotIncrementSizeWhenItEqualsCapacity) {
+    RingBuffer ringBuffer{1};
+    ringBuffer.add(1);
+    ringBuffer.add(3);
+
+    EXPECT_EQ(1, ringBuffer.size());
+}
+
 TEST(RingBuffer, Remove) {
     RingBuffer ringBuffer{2};
     ringBuffer.add(1);
