@@ -16,4 +16,5 @@ public:
 private:
     unsigned int _capacity;
     unsigned int _size;
+    int _data;
 };
