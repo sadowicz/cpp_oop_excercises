@@ -1,10 +1,14 @@
 #include "RingBuffer.h"
 
-RingBuffer::RingBuffer(unsigned int capacity) : _capacity{capacity}, _size{}, _readPtr{_data}, _writePtr{_data} {
+RingBuffer::RingBuffer(unsigned int capacity) : _capacity{capacity}, _size{} {
 
     if(!this->capacity()) {
         throw std::invalid_argument{"Zero passed as capacity."};
     }
+
+    _data = new int[this->capacity()];
+    _readPtr = _data;
+    _writePtr = _data;
 }
 
 void RingBuffer::add(int element) {
