@@ -6,14 +6,14 @@
 
 TEST(SetString, RemoveElements) {
 
-    // TODO: ...
+    std::set<std::string> set{"A", "B", "C"};
 
     ASSERT_EQ(3u, set.size());
     EXPECT_EQ(1u, set.count("A"));
     EXPECT_EQ(1u, set.count("B"));
     EXPECT_EQ(1u, set.count("C"));
 
-    // TODO: ...
+    set.erase("B");
 
     ASSERT_EQ(2u, set.size());
     EXPECT_EQ(1u, set.count("A"));
@@ -23,23 +23,24 @@ TEST(SetString, RemoveElements) {
 
 TEST(SetFloat, ElementsSortedWhenIterating) {
 
-    // TODO: ...
+    std::set<float> set{};
 
     ASSERT_TRUE(set.empty());
 
-    // TODO: ...
+    set.insert(3.2f);
 
     ASSERT_EQ(1u, set.size());
     EXPECT_EQ(1u, set.count(3.2f));
 
-    // TODO: ...
+    set.insert(4.1f);
+    set.insert(1.1f);
 
     ASSERT_EQ(3u, set.size());
     EXPECT_EQ(1u, set.count(3.2f));
     EXPECT_EQ(1u, set.count(4.1f));
     EXPECT_EQ(1u, set.count(1.1f));
 
-    // TODO: ...
+    set.insert(.3f);
 
     auto iter = set.begin();
     EXPECT_FLOAT_EQ(0.3f, *iter++);
@@ -52,10 +53,12 @@ TEST(SetFloat, ElementsSortedWhenIterating) {
 TEST(SetInt, ElementsSortedInDecreasingOrderWhenIterating) {
 
     struct Comparator {
-        // TODO: ...
+        bool operator()(const int& lhs, const int& rhs) const {
+            return lhs > rhs;
+        }
     };
 
-    // TODO: ...
+    std::set<int, Comparator> set{1, 2, 3};
 
     auto iter = set.begin();
     EXPECT_EQ(3, *iter++);
@@ -63,7 +66,7 @@ TEST(SetInt, ElementsSortedInDecreasingOrderWhenIterating) {
     EXPECT_EQ(1, *iter++);
     EXPECT_EQ(set.end(), iter);
 
-    // TODO: ...
+    set.insert(4);
 
     iter = set.begin();
     EXPECT_EQ(4, *iter++);
@@ -76,18 +79,20 @@ TEST(SetInt, ElementsSortedInDecreasingOrderWhenIterating) {
 TEST(SetChar, InvalidComparatorThatCausesOnlyOneElementToBeInserted) {
 
     struct Comparator {
-        // TODO: ...
+        bool operator()(const char& lhs, const char& rhs) const {
+            return false;
+        }
     };
 
-    // TODO: ...
+    std::set<char, Comparator> set{};
 
     ASSERT_TRUE(set.empty());
 
-    // TODO: ...
+    set.insert('a');
 
     ASSERT_EQ(1u, set.size());
 
-    // TODO: ...
+    set.insert('b');
 
     ASSERT_EQ(1u, set.size());
 }
@@ -95,18 +100,20 @@ TEST(SetChar, InvalidComparatorThatCausesOnlyOneElementToBeInserted) {
 TEST(SetChar, InvalidComparatorThatCausesMultipleCopiesOfTheSameElementToBeInserted) {
 
     struct Comparator {
-        // TODO: ...
+        bool operator()(const char& lhs, const char& rhs) const {
+            return true;
+        }
     };
 
-    // TODO: ...
+    std::set<char, Comparator> set{};
 
     ASSERT_TRUE(set.empty());
 
-    // TODO: ...
+    set.insert('a');
 
     ASSERT_EQ(1u, set.size());
 
-    // TODO: ...
+    set.insert('a');
 
     ASSERT_EQ(2u, set.size());
 }
@@ -114,36 +121,42 @@ TEST(SetChar, InvalidComparatorThatCausesMultipleCopiesOfTheSameElementToBeInser
 TEST(SetValue, CustomTypeAndComparator) {
 
     struct Value {
-        // TODO: ...
+        int a;
+        int b;
     };
 
     struct Comparator {
-        // TODO: ...
+        bool operator()(const Value& lhs, const Value& rhs) const {
+            if(lhs.a == rhs.a)
+                return lhs.b < rhs.b;
+
+            return lhs.a < rhs.a;
+        }
     };
 
-    // TODO: ...
+    std::set<Value, Comparator> set{};
 
     ASSERT_TRUE(set.empty());
 
-    // TODO: ...
+    set.insert(Value{1, 0});
 
     ASSERT_EQ(1u, set.size());
     EXPECT_EQ(1u, set.count(Value{1, 0}));
 
-    // TODO: ...
+    set.insert(Value{2, 0});
 
     ASSERT_EQ(2u, set.size());
     EXPECT_EQ(1u, set.count(Value{1, 0}));
     EXPECT_EQ(1u, set.count(Value{2, 0}));
 
-    // TODO: ...
+    set.insert(Value{1, 1});
 
     ASSERT_EQ(3u, set.size());
     EXPECT_EQ(1u, set.count(Value{1, 0}));
     EXPECT_EQ(1u, set.count(Value{2, 0}));
     EXPECT_EQ(1u, set.count(Value{1, 1}));
 
-    // TODO: ...
+    set.insert(Value{2, 2});
 
     ASSERT_EQ(4u, set.size());
     EXPECT_EQ(1u, set.count(Value{1, 0}));
@@ -154,7 +167,7 @@ TEST(SetValue, CustomTypeAndComparator) {
 
 TEST(SetInt, ElementsNotLessThanGivenValue) {
 
-    // TODO: ...
+    std::set<int> set{1, 2, 3, 4, 5};
 
     ASSERT_EQ(5u, set.size());
     EXPECT_EQ(1u, set.count(1));
@@ -163,7 +176,7 @@ TEST(SetInt, ElementsNotLessThanGivenValue) {
     EXPECT_EQ(1u, set.count(4));
     EXPECT_EQ(1u, set.count(5));
 
-    // TODO: ...
+    auto iter = set.lower_bound(3);
 
     EXPECT_EQ(3, *iter++);
     EXPECT_EQ(4, *iter++);
@@ -173,7 +186,7 @@ TEST(SetInt, ElementsNotLessThanGivenValue) {
 
 TEST(MapStringString, CreateUsingInitializerList) {
 
-    // TODO: ...
+    std::map<std::string, std::string> map{{"PL", "Poland"}, {"JP", "Japan"}, {"DE", "Germany"}};
 
     ASSERT_EQ(3u, map.size());
     EXPECT_EQ("Poland", map["PL"]);
@@ -183,11 +196,11 @@ TEST(MapStringString, CreateUsingInitializerList) {
 
 TEST(MapSetString, NestedCollections) {
 
-    // TODO: ...
+    std::map<std::string, std::set<std::string>> map{};
 
     ASSERT_TRUE(map.empty());
 
-    // TODO: ...
+    map.insert({"digits", {"1", "2", "3", "4"}});
 
     ASSERT_EQ(1u, map.size());
     ASSERT_EQ(1u, map.count("digits"));
@@ -201,14 +214,14 @@ TEST(MapSetString, NestedCollections) {
 
 TEST(MultimapIntInt, RemoveRangeOfElements) {
 
-    // TODO: ...
+    std::multimap<int, int> multimap{{1, 1}, {2, 1}, {2, 2}, {2, 3}, {2, 4}, {3, 1}, {3, 2}, {3, 3}};
 
     ASSERT_EQ(8, multimap.size());
     EXPECT_EQ(1, multimap.count(1));
     EXPECT_EQ(4, multimap.count(2));
     EXPECT_EQ(3, multimap.count(3));
 
-    // TODO: ...
+    multimap.erase(2);
 
     ASSERT_EQ(4, multimap.size());
     EXPECT_EQ(1, multimap.count(1));
@@ -218,32 +231,40 @@ TEST(MultimapIntInt, RemoveRangeOfElements) {
 TEST(UnorderedSetValue, CustomTypeHashAndComparator) {
 
     struct Value {
-        // TODO: ...
+        int a;
+        int b;
     };
 
     struct Hash {
-        // TODO: ...
+        std::size_t operator()(const Value& val) const {
+            std::hash<int> hash{};
+            return hash(val.a);
+        }
     };
 
     struct Equal {
-        // TODO: ...
+        bool operator()(const Value& lhs, const Value& rhs) const {
+            return (lhs.a == rhs.a && lhs.b == rhs.b);
+        }
     };
 
-    // TODO: ...
+    std::unordered_set<Value, Hash, Equal> unordered_set{};
 
     ASSERT_TRUE(unordered_set.empty());
 
-    // TODO: ...
+    unordered_set.insert(Value{1, 1});
 
     ASSERT_EQ(1u, unordered_set.size());
     EXPECT_EQ(1u, unordered_set.count(Value{1, 1}));
 
-    // TODO: ...
+    unordered_set.insert(Value{1, 1});
 
     ASSERT_EQ(1u, unordered_set.size());
     EXPECT_EQ(1u, unordered_set.count(Value{1, 1}));
 
-    // TODO: ...
+    unordered_set.insert(Value{1, 2});
+    unordered_set.insert(Value{2, 1});
+    unordered_set.insert(Value{2, 2});
 
     ASSERT_EQ(4u, unordered_set.size());
     EXPECT_EQ(1u, unordered_set.count(Value{1, 1}));
@@ -254,49 +275,53 @@ TEST(UnorderedSetValue, CustomTypeHashAndComparator) {
 
 TEST(UnorderedSetInt, BucketsAndLoadFactor) {
 
-    // TODO: ...
+    std::unordered_set<int> unordered_set{1};
 
     ASSERT_EQ(1u, unordered_set.size());
     EXPECT_EQ(2u, unordered_set.bucket_count());
     EXPECT_FLOAT_EQ(1.0 / 2.0, unordered_set.load_factor());
     EXPECT_FLOAT_EQ(1.0f, unordered_set.max_load_factor());
 
-    // TODO: ...
+    unordered_set.insert(2);
 
     ASSERT_EQ(2u, unordered_set.size());
     EXPECT_EQ(2u, unordered_set.bucket_count());
     EXPECT_FLOAT_EQ(1.0f, unordered_set.load_factor());
     EXPECT_FLOAT_EQ(1.0f, unordered_set.max_load_factor());
 
-    // TODO: ...
+    unordered_set.insert(3);
 
     ASSERT_EQ(3u, unordered_set.size());
     EXPECT_EQ(5u, unordered_set.bucket_count());
     EXPECT_FLOAT_EQ(3.0 / 5.0, unordered_set.load_factor());
     EXPECT_FLOAT_EQ(1.0f, unordered_set.max_load_factor());
 
-    // TODO: ...
+    unordered_set.insert(4);
 
     ASSERT_EQ(4u, unordered_set.size());
     EXPECT_EQ(5u, unordered_set.bucket_count());
     EXPECT_FLOAT_EQ(4.0 / 5.0, unordered_set.load_factor());
     EXPECT_FLOAT_EQ(1.0f, unordered_set.max_load_factor());
 
-    // TODO: ...
+    unordered_set.insert(5);
 
     ASSERT_EQ(5u, unordered_set.size());
     EXPECT_EQ(5u, unordered_set.bucket_count());
     EXPECT_FLOAT_EQ(1.0f, unordered_set.load_factor());
     EXPECT_FLOAT_EQ(1.0f, unordered_set.max_load_factor());
 
-    // TODO: ...
+    unordered_set.insert(6);
+    unordered_set.insert(7);
+    unordered_set.insert(8);
+    unordered_set.insert(9);
+    unordered_set.insert(10);
 
     ASSERT_EQ(10u, unordered_set.size());
     EXPECT_EQ(11u, unordered_set.bucket_count());
     EXPECT_FLOAT_EQ(10.0 / 11.0, unordered_set.load_factor());
     EXPECT_FLOAT_EQ(1.0f, unordered_set.max_load_factor());
 
-    // TODO: ...
+    unordered_set.insert(11);
 
     ASSERT_EQ(11u, unordered_set.size());
     EXPECT_EQ(11u, unordered_set.bucket_count());
