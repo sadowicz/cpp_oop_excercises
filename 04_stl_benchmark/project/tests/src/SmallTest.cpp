@@ -30,6 +30,17 @@ TEST(SmallTest, HasLessThenOperator) {
     a < b;
 }
 
+TEST(SmallTest, LessOperatorReturnsTrueWhenLeftArgIsLessThanRightArg) {
+
+    Small a{};
+    Small b{};
+
+    a.data[0] = 1;
+    b.data[0] = 2;
+
+    EXPECT_EQ(true, a < b);
+}
+
 TEST(SmallTest, HasEqualityOperator) {
 
     Small a{};
