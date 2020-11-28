@@ -122,6 +122,16 @@ TEST(SmallTest, HashDifferesForDifferentData0Element) {
     EXPECT_NE(std::hash<Small>{}(a), std::hash<Small>{}(b));
 }
 
+TEST(SmallTest, HashIsSameForSameData0Element) {
+Small a{};
+Small b{};
+
+a.data[0] = 4;
+b.data[0] = 4;
+
+EXPECT_EQ(std::hash<Small>{}(a), std::hash<Small>{}(b));
+}
+
 TEST(SmallTest, Collections) {
 
     Small small{};
