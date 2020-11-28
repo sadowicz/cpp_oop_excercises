@@ -41,6 +41,17 @@ TEST(SmallTest, LessOperatorReturnsTrueWhenLeftArgIsLessThanRightArg) {
     EXPECT_EQ(true, a < b);
 }
 
+TEST(SmallTest, LessOperatorReturnsFalseWhenLeftArgIsGreaterThanRightArg) {
+
+Small a{};
+Small b{};
+
+a.data[0] = 4;
+b.data[0] = -3;
+
+EXPECT_EQ(false, a < b);
+}
+
 TEST(SmallTest, HasEqualityOperator) {
 
     Small a{};
