@@ -28,7 +28,7 @@ struct Small {
     bool operator==(const Small &rhs) const {
 
         // TODO: Implement me!
-        return true;
+        return false;
     }
 };
 
