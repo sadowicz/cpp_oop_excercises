@@ -22,8 +22,12 @@ struct Small {
 
     bool operator<(const Small &rhs) const {
 
-        // TODO: Implement me!
-        return true;
+        bool result = true;
+
+        if(this->data[0] > rhs.data[0])
+            result = false;
+
+        return result;
     }
 
     bool operator==(const Small &rhs) const {
