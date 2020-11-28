@@ -52,6 +52,17 @@ b.data[0] = -3;
 EXPECT_EQ(false, a < b);
 }
 
+TEST(SmallTest, LessOperatorReturnsFalseWhenLeftArgIsEqualToRightArg) {
+
+    Small a{};
+    Small b{};
+
+    a.data[0] = 5;
+    b.data[0] = 5;
+
+    EXPECT_EQ(false, a < b);
+}
+
 TEST(SmallTest, HasEqualityOperator) {
 
     Small a{};
