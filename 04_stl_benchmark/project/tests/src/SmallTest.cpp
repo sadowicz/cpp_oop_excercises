@@ -82,6 +82,17 @@ TEST(SmallTest, EqualityOperatorReturnsFalseWhenLeftArgIsLessThanRightArg) {
     EXPECT_EQ(false, a == b);
 }
 
+TEST(SmallTest, EqualityOperatorReturnsTrueWhenLeftArgEqualsToRightArg) {
+
+    Small a{};
+    Small b{};
+
+    a.data[0] = 3;
+    b.data[0] = 3;
+
+    EXPECT_EQ(true, a == b);
+}
+
 TEST(SmallTest, CanBeHashed) {
 
     Small small{};
