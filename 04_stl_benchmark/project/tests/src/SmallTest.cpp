@@ -71,6 +71,17 @@ TEST(SmallTest, HasEqualityOperator) {
     a == b;
 }
 
+TEST(SmallTest, EqualityOperatorReturnsFalseWhenLeftArgIsLessThanRightArg) {
+
+    Small a{};
+    Small b{};
+
+    a.data[0] = -5;
+    b.data[0] = 4;
+
+    EXPECT_EQ(false, a == b);
+}
+
 TEST(SmallTest, CanBeHashed) {
 
     Small small{};
