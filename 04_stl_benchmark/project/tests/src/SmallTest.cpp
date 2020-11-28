@@ -112,6 +112,16 @@ TEST(SmallTest, CanBeHashed) {
     hash(small);
 }
 
+TEST(SmallTest, HashDifferesForDifferentData0Element) {
+    Small a{};
+    Small b{};
+
+    a.data[0] = 1;
+    b.data[0] = 2;
+
+    EXPECT_NE(std::hash<Small>{}(a), std::hash<Small>{}(b));
+}
+
 TEST(SmallTest, Collections) {
 
     Small small{};
@@ -176,6 +186,3 @@ TEST(SmallTest, Clear) {
         ASSERT_EQ(0, i);
     }
 }
-
-
-// TODO: Add tests for your operators implementation!
