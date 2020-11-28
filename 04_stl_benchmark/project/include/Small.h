@@ -35,9 +35,11 @@ namespace std {
     template<>
     struct hash<Small> {
         std::size_t operator()(const Small &d) const {
+            static std::random_device rd{};
+            static std::mt19937 gen{rd()};
+            static std::uniform_int_distribution<size_t> dis{std::numeric_limits<size_t>::min(), std::numeric_limits<size_t>::max()};
 
-            // TODO: Implement me!
-            return 0;
+            return dis(gen);
         }
     };
 }
