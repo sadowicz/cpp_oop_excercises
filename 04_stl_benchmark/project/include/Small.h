@@ -24,7 +24,7 @@ struct Small {
 
         bool result = true;
 
-        if(this->data[0] > rhs.data[0])
+        if(this->data[0] >= rhs.data[0])
             result = false;
 
         return result;
