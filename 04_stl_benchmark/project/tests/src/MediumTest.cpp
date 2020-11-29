@@ -29,7 +29,7 @@ TEST(MediumTest, HasLessThenOperator) {
     a < b;
 }
 
-TEST(MediumTest, LessThanOperatorReturnsTrueWhenLeftArgData0IsLessTanRightArgData0) {
+TEST(MediumTest, LessThanOperatorReturnsTrueWhenLeftArgData0IsLessThanRightArgData0) {
     Medium a{};
     Medium b{};
 
