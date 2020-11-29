@@ -29,6 +29,18 @@ TEST(MediumTest, HasLessThenOperator) {
     a < b;
 }
 
+TEST(MediumTest, LessThanOperatorReturnsTrueWhenLeftArgData0IsLessTanRightArgData0) {
+    Medium a{};
+    Medium b{};
+
+    std::fill_n(a.data, Medium::SIZE, 5);
+    std::fill_n(b.data, Medium::SIZE, 5);
+
+    a.data[0] = 3;
+
+    EXPECT_EQ(true, a < b);
+}
+
 TEST(MediumTest, HasEqualityOperator) {
 
     Medium a{};
