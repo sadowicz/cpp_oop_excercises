@@ -53,6 +53,16 @@ TEST(MediumTest, LessThanOperatorReturnsFalseWhenLeftArgData0IsGreaterThanRightA
     EXPECT_EQ(false, a < b);
 }
 
+TEST(MediumTest, LessThanOperatorReturnsFalseWhenLeftArgDataIsSameAsRightArgData) {
+    Medium a{};
+    Medium b{};
+
+    std::fill_n(a.data, Medium::SIZE, 2);
+    std::fill_n(b.data, Medium::SIZE, 2);
+
+    EXPECT_EQ(false, a < b);
+}
+
 TEST(MediumTest, HasEqualityOperator) {
 
     Medium a{};
