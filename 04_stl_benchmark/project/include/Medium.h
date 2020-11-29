@@ -22,8 +22,7 @@ struct Medium {
 
     bool operator<(const Medium &rhs) const {
 
-        // TODO: Implement me!
-        return false;
+        return true;
     }
 
     bool operator==(const Medium &rhs) const {
