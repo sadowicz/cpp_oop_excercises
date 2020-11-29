@@ -22,12 +22,13 @@ struct Medium {
 
     bool operator<(const Medium &rhs) const {
 
-        bool result = true;
+        size_t index = 0;
 
-        if(this->data[0] >= rhs.data[0])
-            result = false;
+        while(index < SIZE - 1 && this->data[index] == rhs.data[index]) {
+            index++;
+        }
 
-        return result;
+        return this->data[index] < rhs.data[index];
     }
 
     bool operator==(const Medium &rhs) const {
