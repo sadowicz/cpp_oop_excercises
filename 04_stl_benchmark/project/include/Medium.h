@@ -28,7 +28,12 @@ struct Medium {
 
     bool operator==(const Medium &rhs) const {
 
-        return false;
+        bool result = true;
+
+        if(this->data[0] < rhs.data[0])
+            result = false;
+
+        return result;
     }
 };
 
