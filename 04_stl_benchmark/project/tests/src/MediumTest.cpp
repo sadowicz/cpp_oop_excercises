@@ -82,6 +82,19 @@ TEST(MediumTest, HasEqualityOperator) {
     a == b;
 }
 
+TEST(MediumTest, EqualityOperatorReturnsFalseWhenLeftArgData0IsLessThanRightArgData0) {
+
+    Medium a{};
+    Medium b{};
+
+    std::fill_n(a.data, Medium::SIZE, 4);
+    std::fill_n(b.data, Medium::SIZE, 4);
+
+    a.data[0] = 2;
+
+    EXPECT_EQ(false, a == b);
+}
+
 TEST(MediumTest, CanBeHashed) {
 
     Medium medium{};
