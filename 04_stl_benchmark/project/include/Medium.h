@@ -22,13 +22,8 @@ struct Medium {
 
     bool operator<(const Medium &rhs) const {
 
-        size_t index = 0;
-
-        while(index < SIZE - 1 && this->data[index] == rhs.data[index]) {
-            index++;
-        }
-
-        return this->data[index] < rhs.data[index];
+        return std::lexicographical_compare(std::cbegin(this->data), std::cend(this->data),
+                                            std::cbegin(rhs.data), std::cend(rhs.data));
     }
 
     bool operator==(const Medium &rhs) const {
