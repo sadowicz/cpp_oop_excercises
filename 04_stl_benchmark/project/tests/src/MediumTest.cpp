@@ -143,6 +143,17 @@ TEST(MediumTest, CanBeHashed) {
     hash(medium);
 }
 
+TEST(MediumTest, HashIsSameForArgsWithIdenticallyFilledDataArray) {
+
+    Medium a{};
+    Medium b{};
+
+    std::fill_n(a.data, Medium::SIZE, 4);
+    std::fill_n(b.data, Medium::SIZE, 4);
+
+    EXPECT_EQ(std::hash<Medium>{}(a), std::hash<Medium>{}(b));
+}
+
 TEST(MediumTest, Collections) {
 
     Medium medium{};
@@ -204,5 +215,3 @@ TEST(MediumTest, Clear) {
         ASSERT_EQ(0, i);
     }
 }
-
-// TODO: Add tests for your operators implementation!
