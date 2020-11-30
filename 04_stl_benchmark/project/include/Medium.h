@@ -37,8 +37,14 @@ namespace std {
     struct hash<Medium> {
         std::size_t operator()(const Medium &d) const {
 
-            // TODO: Implement me!
-            return 0;
+            std::size_t hash = 0;
+            std::hash<int>hasher{};
+
+            for(int i = 0; i < Medium::SIZE; i++) {
+                hash += (hasher(d.data[i]) * (i + 1));
+            }
+
+            return hash;
         }
     };
 }
