@@ -1,7 +1,7 @@
 #include "Small.h"
 #include "BenchIncludes.h"
 
-static void LessThanSmall(State& state) {
+static void Small_LessThan(State& state) {
 
     Small a{};
     Small b{};
@@ -15,7 +15,7 @@ static void LessThanSmall(State& state) {
     }
 }
 
-static void EqualitySmall(State& state) {
+static void Small_Equality(State& state) {
 
     Small a{};
     Small b{};
@@ -29,7 +29,7 @@ static void EqualitySmall(State& state) {
     }
 }
 
-static void HashSmall(State& state) {
+static void Small_Hash(State& state) {
 
     Small a{};
 
@@ -40,6 +40,6 @@ static void HashSmall(State& state) {
     }
 }
 
-BENCHMARK(LessThanSmall);
-BENCHMARK(EqualitySmall);
-BENCHMARK(HashSmall);
+BENCHMARK(Small_LessThan);
+BENCHMARK(Small_Equality);
+BENCHMARK(Small_Hash);
