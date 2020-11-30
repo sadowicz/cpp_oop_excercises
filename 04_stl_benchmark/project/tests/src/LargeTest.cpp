@@ -146,6 +146,17 @@ TEST(LargeTest, CanBeHashed) {
     hash(large);
 }
 
+TEST(LargeTest, HashIsSameForArgsWithIdenticallyFilledDataArray) {
+
+Large a{};
+Large b{};
+
+std::fill_n(a.data, Large::SIZE, 241099.443403);
+std::fill_n(b.data, Large::SIZE, 241099.443403);
+
+EXPECT_EQ(std::hash<Large>{}(a), std::hash<Large>{}(b));
+}
+
 TEST(LargeTest, Collections) {
 
     Large large{};
