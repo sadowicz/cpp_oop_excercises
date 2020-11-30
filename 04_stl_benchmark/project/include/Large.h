@@ -24,8 +24,8 @@ struct Large {
 
     bool operator<(const Large &rhs) const {
 
-        // TODO: Implement me!
-        return false;
+        return std::lexicographical_compare(std::cbegin(this->data), std::cend(this->data),
+                                            std::cbegin(rhs.data), std::cend(rhs.data));
     }
 
     bool operator==(const Large &rhs) const {

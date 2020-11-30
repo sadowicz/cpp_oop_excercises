@@ -30,6 +30,51 @@ TEST(LargeTest, HasLessThenOperator) {
     a < b;
 }
 
+TEST(LargeTest, LessThanOperatorReturnsTrueWhenLeftArgData0IsLessThanRightArgData0) {
+    Large a{};
+    Large b{};
+
+    std::fill_n(a.data, Large::SIZE, 5);
+    std::fill_n(b.data, Large::SIZE, 5);
+
+    a.data[0] = 3;
+
+    EXPECT_EQ(true, a < b);
+}
+
+TEST(LargeTest, LessThanOperatorReturnsFalseWhenLeftArgData0IsGreaterThanRightArgData0) {
+    Large a{};
+    Large b{};
+
+    std::fill_n(a.data, Large::SIZE, 5);
+    std::fill_n(b.data, Large::SIZE, 5);
+
+    a.data[0] = 6;
+
+    EXPECT_EQ(false, a < b);
+}
+
+TEST(LargeTest, LessThanOperatorReturnsFalseWhenLeftArgDataIsSameAsRightArgData) {
+    Large a{};
+    Large b{};
+
+    std::fill_n(a.data, Large::SIZE, 2);
+    std::fill_n(b.data, Large::SIZE, 2);
+
+    EXPECT_EQ(false, a < b);
+}
+
+TEST(LargeTest, LessThanOperatorReturnsTrueWhenEncounteredLeftArgDataElementLessThanRightArgDataElementAfterEqualElements) {
+    Large a{};
+    Large b{};
+
+    std::fill_n(a.data, Large::SIZE, 2);
+    std::fill_n(b.data, Large::SIZE, 2);
+
+    a.data[100] = 1;
+
+    EXPECT_EQ(true, a < b);
+}
 TEST(LargeTest, HasEqualityOperator) {
 
     Large a{};
