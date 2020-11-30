@@ -1,4 +1,18 @@
 #include "Small.h"
 #include "BenchIncludes.h"
 
-// TODO: Add benchmarks for operator<. operator==, and hash
+static void LessThanSmall(State& state) {
+
+    Small a{};
+    Small b{};
+
+    for(auto _ : state) {
+
+        a.randomize();
+        b.randomize();
+
+        a < b;
+    }
+}
+
+BENCHMARK(LessThanSmall);
