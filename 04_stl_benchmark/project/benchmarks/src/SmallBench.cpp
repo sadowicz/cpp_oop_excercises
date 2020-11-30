@@ -29,5 +29,17 @@ static void EqualitySmall(State& state) {
     }
 }
 
+static void HashSmall(State& state) {
+
+    Small a{};
+
+    for(auto _ : state) {
+
+        a.randomize();
+        std::hash<Small>{}(a);
+    }
+}
+
 BENCHMARK(LessThanSmall);
 BENCHMARK(EqualitySmall);
+BENCHMARK(HashSmall);
