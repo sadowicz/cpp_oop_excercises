@@ -15,4 +15,19 @@ static void LessThanSmall(State& state) {
     }
 }
 
+static void EqualitySmall(State& state) {
+
+    Small a{};
+    Small b{};
+
+    for(auto _ : state) {
+
+        a.randomize();
+        b.randomize();
+
+        a == b;
+    }
+}
+
 BENCHMARK(LessThanSmall);
+BENCHMARK(EqualitySmall);
