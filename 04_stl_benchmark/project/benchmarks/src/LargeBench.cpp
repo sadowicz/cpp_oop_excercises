@@ -29,5 +29,17 @@ static void Large_Equality(State& state) {
     }
 }
 
+static void Large_Hash(State& state) {
+
+    Large a{};
+
+    for(auto _ : state) {
+
+        a.randomize();
+        std::hash<Large>{}(a);
+    }
+}
+
 BENCHMARK(Large_LessThan);
 BENCHMARK(Large_Equality);
+BENCHMARK(Large_Hash);
