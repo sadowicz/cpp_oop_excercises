@@ -30,8 +30,7 @@ struct Large {
 
     bool operator==(const Large &rhs) const {
 
-        // TODO: Implement me!
-        return true;
+        return std::equal(std::cbegin(this->data), std::cend(this->data), std::cbegin(rhs.data));
     }
 };
 

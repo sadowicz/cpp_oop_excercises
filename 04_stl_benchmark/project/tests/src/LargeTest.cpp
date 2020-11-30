@@ -83,6 +83,61 @@ TEST(LargeTest, HasEqualityOperator) {
     a == b;
 }
 
+TEST(LargeTest, EqualityOperatorReturnsFalseWhenLeftArgData0IsLessThanRightArgData0) {
+
+    Large a{};
+    Large b{};
+
+    std::fill_n(a.data, Large::SIZE, 4);
+    std::fill_n(b.data, Large::SIZE, 4);
+
+    a.data[0] = 2;
+
+    EXPECT_EQ(false, a == b);
+}
+
+TEST(LargeTest, EqualityOperatorReturnsTrueWhenLeftArgDataIsSameAsRightArgData) {
+
+    Large a{};
+    Large b{};
+
+    std::fill_n(a.data, Large::SIZE, 4);
+    std::fill_n(b.data, Large::SIZE, 4);
+
+    EXPECT_EQ(true, a == b);
+}
+
+TEST(LargeTest, EqualityOperatorReturnsFalseWhenLeftArgData0IsGreaterThanRightArgData0) {
+
+    Large a{};
+    Large b{};
+
+    std::fill_n(a.data, Large::SIZE, 3);
+    std::fill_n(b.data, Large::SIZE, 3);
+
+    a.data[0] = 4;
+
+    EXPECT_EQ(false, a == b);
+}
+
+TEST(LargeTest, EqualityOperatorReturnsFalseWhenEncounteredLeftArgDataElementUnequalToRightArgDataElementAfterEqualElements) {
+
+    Large a{};
+    Large b{};
+    Large c{};
+
+    std::fill_n(a.data, Large::SIZE, 3);
+    std::fill_n(b.data, Large::SIZE, 3);
+    std::fill_n(c.data, Large::SIZE, 3);
+
+    a.data[200] = 2;
+    b.data[120] = 4;
+
+    EXPECT_EQ(false, a == c);
+    EXPECT_EQ(false, b == c);
+}
+
+
 TEST(LargeTest, CanBeHashed) {
 
     Large large{};
