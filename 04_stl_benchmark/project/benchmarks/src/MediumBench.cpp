@@ -29,5 +29,17 @@ static void Medium_Equality(State& state) {
     }
 }
 
+static void Medium_Hash(State& state) {
+
+    Medium a{};
+
+    for(auto _ : state) {
+
+        a.randomize();
+        std::hash<Medium>{}(a);
+    }
+}
+
 BENCHMARK(Medium_LessThan);
 BENCHMARK(Medium_Equality);
+BENCHMARK(Medium_Hash);
