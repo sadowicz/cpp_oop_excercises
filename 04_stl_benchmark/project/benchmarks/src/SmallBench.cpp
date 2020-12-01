@@ -136,8 +136,49 @@ static void Small_Rand(State& state) {
 
     for(auto _ : state) {
 
-        rand() % 100;
+        auto number = rand() % 100;
     }
 }
 
 BENCHMARK(Small_Rand);
+
+/*static void Small_forwardListInsertEraseAfterRandElement(State& state) {
+
+    auto N = state.range(0);
+    auto size = (std::size_t)N;
+
+    std::forward_list<Small> fList{size};
+    auto iter = fList.before_begin();
+    Small inserted{};
+
+    for(auto _ : state) {
+
+        auto index = rand() % size;
+
+        fList.insert_after(iter + index, inserted);
+        fList.erase_after(iter + index);
+    }
+
+    state.SetComplexityN(N);
+}
+
+BENCHMARK(Small_forwardListInsertEraseAfterRandElement)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();*/
+
+static void Small_forwardListPushFrontPopFront(State& state) {
+
+    auto N = state.range(0);
+    auto size = (std::size_t)N;
+
+    std::forward_list<Small> fList{size};
+    Small inserted{};
+
+    for(auto _ : state) {
+
+        fList.push_front(inserted);
+        fList.pop_front();
+    }
+
+    state.SetComplexityN(N);
+}
+
+BENCHMARK(Small_forwardListPushFrontPopFront)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
