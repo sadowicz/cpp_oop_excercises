@@ -330,3 +330,20 @@ static void Small_forwardListSpliceAfter(State& state) {
 }
 
 BENCHMARK(Small_forwardListSpliceAfter)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+
+static void Small_forwardListReverse(State& state) {
+
+    auto N = state.range(0);
+    auto size = (std::size_t)N;
+
+    std::forward_list<Small> fList{size};
+
+    for(auto _ : state) {
+
+       fList.reverse();
+    }
+
+    state.SetComplexityN(N);
+}
+
+BENCHMARK(Small_forwardListReverse)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
