@@ -182,3 +182,23 @@ static void Small_forwardListPushFrontPopFront(State& state) {
 }
 
 BENCHMARK(Small_forwardListPushFrontPopFront)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+
+static void Small_forwardListResizeToRand(State& state) {
+
+    auto N = state.range(0);
+    auto size = (std::size_t)N;
+
+    auto maxResize = 4 * size + 1;
+    srand((unsigned int)time(nullptr));
+
+    std::forward_list<Small> fList{size};
+
+    for(auto _ : state) {
+
+        fList.resize(rand() % maxResize);
+    }
+
+    state.SetComplexityN(N);
+}
+
+BENCHMARK(Small_forwardListResizeToRand)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
