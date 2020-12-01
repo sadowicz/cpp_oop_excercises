@@ -36,7 +36,7 @@ namespace std {
     struct hash<Small> {
         std::size_t operator()(const Small &d) const {
 
-            return d.data[0];
+            return std::hash<char>{}(d.data[0]);
         }
     };
 }
