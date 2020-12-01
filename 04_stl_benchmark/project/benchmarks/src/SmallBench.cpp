@@ -1,4 +1,5 @@
 #include <forward_list>
+#include <ctime>
 
 #include "Small.h"
 #include "BenchIncludes.h"
@@ -130,3 +131,13 @@ static void Small_forwardListCreateAndClear(State& state) {
 }
 
 BENCHMARK(Small_forwardListCreateAndClear)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+
+static void Small_Rand(State& state) {
+
+    for(auto _ : state) {
+
+        rand() % 100;
+    }
+}
+
+BENCHMARK(Small_Rand);
