@@ -240,7 +240,7 @@ static void Small_forwardListRandomizeElements(State& state) {
 
 BENCHMARK(Small_forwardListRandomizeElements)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
 
-static void Small_forwardListSort(State& state) {
+static void Small_forwardListSort(State& state) {   // - 1 * RandomizeElements
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
@@ -261,3 +261,55 @@ static void Small_forwardListSort(State& state) {
 }
 
 BENCHMARK(Small_forwardListSort)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+
+static void Small_forwardListMerge(State& state) {  //  - 2 * sort
+
+    auto N = state.range(0);
+    auto size = (std::size_t)N;
+
+    for(auto _ : state) {
+
+        std::forward_list<Small> fList1{size};
+
+        for(auto& element : fList1) {
+
+            element.randomize();
+        }
+        fList1.sort();
+
+
+        std::forward_list<Small> fList2{size};
+
+        for(auto& element : fList2) {
+
+            element.randomize();
+        }
+        fList2.sort();
+
+
+        fList1.merge(fList2);
+    }
+
+    state.SetComplexityN(N);
+}
+
+BENCHMARK(Small_forwardListMerge)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+
+static void Small_forwardListSpliceAfter(State& state) {
+
+    auto N = state.range(0);
+    auto size = (std::size_t)N;
+
+    std::forward_list<Small> fList2{size};
+
+    for(auto _ : state) {
+
+        std::forward_list<Small> fList1{size};
+
+        fList1.splice_after(fList1.begin(), fList2);
+    }
+
+    state.SetComplexityN(N);
+}
+
+BENCHMARK(Small_forwardListSpliceAfter)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
