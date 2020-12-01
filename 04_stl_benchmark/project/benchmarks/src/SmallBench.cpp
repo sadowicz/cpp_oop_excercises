@@ -6,40 +6,42 @@ static void Small_LessThan(State& state) {
     Small a{};
     Small b{};
 
-    for(auto _ : state) {
+    a.randomize();
+    b.randomize();
 
-        a.randomize();
-        b.randomize();
+    for(auto _ : state) {
 
         a < b;
     }
 }
+
+BENCHMARK(Small_LessThan);
 
 static void Small_Equality(State& state) {
 
     Small a{};
     Small b{};
 
-    for(auto _ : state) {
+    a.randomize();
+    b.randomize();
 
-        a.randomize();
-        b.randomize();
+    for(auto _ : state) {
 
         a == b;
     }
 }
 
+BENCHMARK(Small_Equality);
+
 static void Small_Hash(State& state) {
 
     Small a{};
+    a.randomize();
 
     for(auto _ : state) {
 
-        a.randomize();
         std::hash<Small>{}(a);
     }
 }
 
-BENCHMARK(Small_LessThan);
-BENCHMARK(Small_Equality);
 BENCHMARK(Small_Hash);
