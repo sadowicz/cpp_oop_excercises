@@ -23,3 +23,26 @@ Zgodnie z zaleceniami dokumentacji, funkcja haszująca powinna zwracać zawsze t
 Dla typu **Small** funkcja haszująca opiera się na zwracaniu wyniku `std::hash<char>{}(data[0])`. Zwracanie hasza do elementu `data[0]` jest wystarczające, gdyż jest to jedyny element na podstawie którego można rozróżnić instancje struktury **Small**. Zastosowanie powyższej funkcjonalności zapewnia bezkolizyjność, oraz jest proste w użyciu.
 
 W typach **Medium** i **Large** wyliczanie hasza odbywa się poprzez sumowanie iloczynów haszów kolejnych elementów tablicy `data[]` i ich wag. Wagą danego elementu jest jego indeks w tablicy powiększony o jeden. Wagi zostały zastosowane, by zmniejszyć prawdopodobieństwo powtarzania się tych samych haszy dla tablic wypełnionych liczbami o tej samej sumie indywidualnych haszy. Dzięki wprowadzeniu wag, wynik funkcji haszującej jest uzależniony nie tylko od haszów kolejnych elementów, ale też od miejsca tych elementów w tablicy. Ta metoda haszowania zapewnia dużą bezkolizyjność. Poza mało prawdopodobnymi sytuacjami gdy uzyskane zostaną specyficzne kombinacje wartości elementów i ich pozycji, lub gdy w wyniku sumowania kolejnych haszy, hasz wynikowy przekroczy rozmiar `std::size_t` w taki sposób, że da hasz przypisany dla innej tablicy, hasze będą unikatowe dla konkretnych wypełnień tablicy `data[]`. Z tego powodu taka funkcja haszująca została uznana za wystarczającą na potrzeby tego projektu.
+
+## 2. Testy operatorów i funkcji haszujących.
+### Wstęp
+Do napisania testów jednostkowych użyta została biblioteka googletest. Dla typów **Small** i **Medium** testy dla operatorów (wraz z operatorami) zostały napisane zgodnie z metodyką *Test-Driven_Development*. Dla typu **Large** operatory i testy zostały skopiowane z typu **Medium** i odpowiednio zmodyfikowane.
+### A.Sposób sprawdzania poprawności
+#### Operatory mniejszości
+W przypadku operatora mniejszości dla typu **Small** testowane jest czy zwraca on `true` wtedy gdy `data[0]` instancji po lewej stronie jest mniejsze od `data[0]` instancji po prawej stronie, i czy w przypadku gdy lewa instancja jest równa albo większa zwracane jest `false`.
+
+Dla typów **Medium** i **Large** testowane jest dodatkowo czy `operator<` zwróci `false`, gdy wszystkie elementy tablicy `data[]` instancji po lewej stronie są równe odpowiadającym elementom `data[]` instancji po prawej stronie, oraz czy zwrócone zostanie `true` jeśli napotkano element tablicy lewej instancji mniejszy od odpowiadającego elementu tablicy prawej instancji.
+#### Operatory równości
+Dla typu **Small** sprawdzane jest, czy `operator==` zwraca `true`, gdy `data[0]` instancji po lewej stronie jest równe `data[0]` instancji po prawej stronie, i czy w przeciwnym przypadku zwracane jest `false`.
+
+W testach dotyczących typów **Medium** oraz **Large** sprawdzane jest dodatkowo, czy zwrócone zostanie `true` gdy wszystkie odpowiadające sobie elementy tablic `data[]` są równe, a `false` gdy napotkane zostaną odpowiadające sobie elementy, które nie są równe.
+
+#### Funkcje haszujące
+Podstawowym założeniem dla funkcji haszującej jest to, czy dla tej samej wartości wyznaczony zostanie ten sam hasz. Na tą własność funkcje haszujące są testowane w każdym typie.
+
+W typie **Small**, ze względu na specyfikę tablicy `data[]`, możliwe jest uzyskanie bezkolizyjności w funkcji haszującej, dlatego również pod tym względem testowana jest funkcja haszująca. W typach **Medium** i **Large** uzyskanie całkowitej bezkolizyjności nie jest możliwe, więc funkcja haszująca nie jest testowana w tym kierunku.
+### B. Inicjowanie testowanych obiektów
+Testowane obiekty nie powinny być inicjalizowane losowymi wartościami. Uniemożliwiałoby to kontrolowanie przebiegu testów. Przykładowo w teście który ma wykazać, że zwracane jest `true` gdy jeden obiekt jest mniejszy od drugiego, w wyniku losowej inicjalizacji to pierwszy obiekt mógłby być czasami większy, a wówczas test czasem by przchodził, a czasem nie. Uniemożliwiałoby to powiązanie wyniku testu ze sposobem implementacji operatora, gdyż nie tylko ona wpływałaby na powodzenie testu.
+
+## 3. Benchmarki dla operatorów i funkcji haszujących
+// TODO..
