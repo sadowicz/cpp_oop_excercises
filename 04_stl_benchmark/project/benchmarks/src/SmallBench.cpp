@@ -99,3 +99,18 @@ static void Small_forwardListMaxSize(State& state) {
 }
 
 BENCHMARK(Small_forwardListMaxSize)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+
+static void Small_forwardListCreate(State& state) {
+
+    auto N = state.range(0);
+    auto size = (std::size_t)N;
+
+    for(auto _ : state) {
+
+        std::forward_list<Small> fList{size};
+    }
+
+    state.SetComplexityN(N);
+}
+
+BENCHMARK(Small_forwardListCreate)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
