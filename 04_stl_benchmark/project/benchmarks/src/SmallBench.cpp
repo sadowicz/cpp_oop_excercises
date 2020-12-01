@@ -202,3 +202,21 @@ static void Small_forwardListResizeToRand(State& state) {
 }
 
 BENCHMARK(Small_forwardListResizeToRand)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+
+static void Small_forwardListSwap(State& state) {
+
+    auto N = state.range(0);
+    auto size = (std::size_t)N;
+
+    std::forward_list<Small> fList1{size};
+    std::forward_list<Small> fList2{size};
+
+    for(auto _ : state) {
+
+        fList1.swap(fList2);
+    }
+
+    state.SetComplexityN(N);
+}
+
+BENCHMARK(Small_forwardListSwap)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
