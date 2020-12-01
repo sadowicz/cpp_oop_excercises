@@ -220,6 +220,26 @@ static void Small_forwardListInsertAfterEraseAfter(State& state) {
 
 BENCHMARK(Small_forwardListInsertAfterEraseAfter)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
 
+static void Small_forwardListRandomizeElements(State& state) {
+
+    auto N = state.range(0);
+    auto size = (std::size_t)N;
+
+    for(auto _ : state) {
+
+        std::forward_list<Small> fList{size};
+
+        for(auto& element : fList) {
+
+            element.randomize();
+        }
+    }
+
+    state.SetComplexityN(N);
+}
+
+BENCHMARK(Small_forwardListRandomizeElements)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+
 static void Small_forwardListSort(State& state) {
 
     auto N = state.range(0);
