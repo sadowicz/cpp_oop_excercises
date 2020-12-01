@@ -1,5 +1,8 @@
+#include <forward_list>
+
 #include "Small.h"
 #include "BenchIncludes.h"
+
 
 static void Small_LessThan(State& state) {
 
@@ -45,3 +48,20 @@ static void Small_Hash(State& state) {
 }
 
 BENCHMARK(Small_Hash);
+
+static void Small_forwardListFront(State& state) {
+
+    auto N = state.range(0);
+    auto size = (std::size_t)N;
+
+    std::forward_list<Small> fList{size};
+
+    for(auto _ : state) {
+
+        fList.front();
+    }
+
+    state.SetComplexityN(N);
+}
+
+BENCHMARK(Small_forwardListFront)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
