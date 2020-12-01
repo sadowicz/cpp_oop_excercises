@@ -50,6 +50,8 @@ static void Small_Hash(State& state) {
 
 BENCHMARK(Small_Hash);
 
+//  FORWARD LIST BENCHMARKS
+
 static void Small_forwardListFront(State& state) {
 
     auto N = state.range(0);
@@ -381,3 +383,19 @@ static void Small_forwardListRemove(State& state) {
 }
 
 BENCHMARK(Small_forwardListRemove)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+
+static void Small_forwardListRemoveIf(State& state) {
+
+    auto N = state.range(0);
+    auto size = (std::size_t)N;
+
+    for(auto _ : state) {
+
+        std::forward_list<Small> fList{size};
+        fList.remove_if([](Small small){ return true; });
+    }
+
+    state.SetComplexityN(N);
+}
+
+BENCHMARK(Small_forwardListRemoveIf)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
