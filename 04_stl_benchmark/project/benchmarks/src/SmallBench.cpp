@@ -295,6 +295,23 @@ static void Small_forwardListMerge(State& state) {  //  - 2 * sort
 
 BENCHMARK(Small_forwardListMerge)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
 
+static void Small_forwardListBegin(State& state) {
+
+    auto N = state.range(0);
+    auto size = (std::size_t)N;
+
+    std::forward_list<Small> fList{size};
+
+    for(auto _ : state) {
+
+        fList.begin();
+    }
+
+    state.SetComplexityN(N);
+}
+
+BENCHMARK(Small_forwardListBegin)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+
 static void Small_forwardListSpliceAfter(State& state) {
 
     auto N = state.range(0);
