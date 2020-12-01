@@ -363,3 +363,21 @@ static void Small_forwardListUnique(State& state) {
 }
 
 BENCHMARK(Small_forwardListUnique)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+
+static void Small_forwardListRemove(State& state) {
+
+    auto N = state.range(0);
+    auto size = (std::size_t)N;
+    Small toRemove{};
+    toRemove.randomize();
+
+    for(auto _ : state) {
+
+        std::forward_list<Small> fList{size};
+        fList.remove(toRemove);
+    }
+
+    state.SetComplexityN(N);
+}
+
+BENCHMARK(Small_forwardListRemove)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
