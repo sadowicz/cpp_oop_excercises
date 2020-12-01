@@ -142,28 +142,6 @@ static void Small_Rand(State& state) {
 
 BENCHMARK(Small_Rand);
 
-/*static void Small_forwardListInsertEraseAfterRandElement(State& state) {
-
-    auto N = state.range(0);
-    auto size = (std::size_t)N;
-
-    std::forward_list<Small> fList{size};
-    auto iter = fList.before_begin();
-    Small inserted{};
-
-    for(auto _ : state) {
-
-        auto index = rand() % size;
-
-        fList.insert_after(iter + index, inserted);
-        fList.erase_after(iter + index);
-    }
-
-    state.SetComplexityN(N);
-}
-
-BENCHMARK(Small_forwardListInsertEraseAfterRandElement)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();*/
-
 static void Small_forwardListPushFrontPopFront(State& state) {
 
     auto N = state.range(0);
@@ -220,3 +198,24 @@ static void Small_forwardListSwap(State& state) {
 }
 
 BENCHMARK(Small_forwardListSwap)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+
+static void Small_forwardListInsertAfterEraseAfter(State& state) {
+
+    auto N = state.range(0);
+    auto size = (std::size_t)N;
+
+    std::forward_list<Small> fList{size};
+    auto place = fList.begin();
+
+    Small inserted{};
+
+    for(auto _ : state) {
+
+        fList.insert_after(place, inserted);
+        fList.erase_after(place);
+    }
+
+    state.SetComplexityN(N);
+}
+
+BENCHMARK(Small_forwardListInsertAfterEraseAfter)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
