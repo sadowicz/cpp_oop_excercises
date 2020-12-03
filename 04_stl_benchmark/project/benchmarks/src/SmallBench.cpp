@@ -1,4 +1,5 @@
 #include <forward_list>
+#include <map>
 #include <ctime>
 
 #include "Small.h"
@@ -399,3 +400,21 @@ static void Small_forwardListRemoveIf(State& state) {
 }
 
 BENCHMARK(Small_forwardListRemoveIf)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+
+// MULTIMAP BENCHMARKS
+
+static void Small_multimapEmpty(State& state) {
+
+    auto N = state.range(0);
+
+    std::multimap<Small, int> multimap{};
+
+    for(auto _ : state) {
+
+        multimap.empty();
+    }
+
+    state.SetComplexityN(N);
+}
+
+BENCHMARK(Small_multimapEmpty)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
