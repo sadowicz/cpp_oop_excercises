@@ -541,3 +541,30 @@ static void Small_multimapInsertErase(State& state) { // TODO Dla .randomized da
 }
 
 BENCHMARK(Small_multimapInsertErase)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+
+static void Small_multimapSwap(State& state) {
+
+    auto N = state.range(0);
+    auto size = (std::size_t)N;
+
+    std::multimap<Small, int> multimap1{};
+    std::multimap<Small, int> multimap2{};
+
+    for(std::size_t i = 0; i < size; i++) {
+        Small inserted1{};
+        Small inserted2{};
+        inserted1.randomize();
+        inserted2.randomize();
+        multimap1.insert({ inserted1, i });
+        multimap2.insert({ inserted2, i });
+    }
+
+    for(auto _ : state) {
+
+        multimap1.swap(multimap2);
+    }
+
+    state.SetComplexityN(N);
+}
+
+BENCHMARK(Small_multimapSwap)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
