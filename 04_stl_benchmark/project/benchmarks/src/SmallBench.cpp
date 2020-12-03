@@ -568,3 +568,42 @@ static void Small_multimapSwap(State& state) {
 }
 
 BENCHMARK(Small_multimapSwap)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+
+static void Small_multimapCount(State& state) { // TODO Dla zasiegu wiekszego niz (1u, 1u << 14u) zlozonosc wieksza niz O(logN) DLACZEGO ??????????
+
+    auto N = state.range(0);
+    auto size = (std::size_t)N;
+
+    std::multimap<Small, int> multimap{};
+
+
+    for(std::size_t i = 0; i < size; i++) {
+
+        Small inserted{};
+        inserted.randomize();
+        multimap.insert({ inserted, i });
+    }
+
+    for(auto _ : state) {
+
+        Small counted{};
+        counted.randomize();    // nie ma wplywu na zlozonosc
+
+        multimap.count(counted);
+    }
+
+    state.SetComplexityN(N);
+}
+
+BENCHMARK(Small_multimapCount)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
+
+static void Small_randomize(State& state) {
+
+    for(auto _ : state) {
+
+        Small small{};
+        small.randomize();
+    }
+}
+
+BENCHMARK(Small_randomize);
