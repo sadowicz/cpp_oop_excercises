@@ -471,3 +471,26 @@ static void Small_multimapMaxSize(State& state) {
 }
 
 BENCHMARK(Small_multimapMaxSize)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+
+static void Small_multimapClear(State& state) {  // NlogN zamiast N przez wstawianie elementow - trzeba odjac (baseline)
+
+    auto N = state.range(0);
+    auto size = (std::size_t)N;
+
+    for(auto _ : state) {
+
+        std::multimap<Small, int> multimap{};
+
+        for(std::size_t i = 0; i < size; i++) {
+            Small inserted{};
+            inserted.randomize();
+            multimap.insert({ inserted, i });
+        }
+
+        multimap.clear();
+    }
+
+    state.SetComplexityN(N);
+}
+
+BENCHMARK(Small_multimapClear)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
