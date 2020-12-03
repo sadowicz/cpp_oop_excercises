@@ -516,29 +516,6 @@ static void Small_multimapClear(State& state) {  // NlogN zamiast N przez wstawi
 
 BENCHMARK(Small_multimapClear)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
 
-static void Small_multimapErase(State& state) { // - insertN
-
-    auto N = state.range(0);
-    auto size = (std::size_t)N;
-
-    for(auto _ : state) {
-
-        std::multimap<Small, int> multimap{};
-
-        for(std::size_t i = 0; i < size; i++) {
-            Small inserted{};
-            inserted.randomize();
-            multimap.insert({ inserted, i });
-        }
-
-        multimap.erase(multimap.begin());
-    }
-
-    state.SetComplexityN(N);
-}
-
-BENCHMARK(Small_multimapErase)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
-
 static void Small_multimapInsertErase(State& state) { // TODO Dla .randomized daje O(1) zamiast O(logN), dlaczego ?????
 
     auto N = state.range(0);
