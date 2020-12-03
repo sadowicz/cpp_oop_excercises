@@ -406,8 +406,15 @@ BENCHMARK(Small_forwardListRemoveIf)->RangeMultiplier(2)->Range(1u, 1u << 16u)->
 static void Small_multimapEmpty(State& state) {
 
     auto N = state.range(0);
+    auto size = (std::size_t)N;
 
     std::multimap<Small, int> multimap{};
+
+    for(std::size_t i = 0; i < size; i++) {
+        Small inserted{};
+        inserted.randomize();
+        multimap.insert({ inserted, i });
+    }
 
     for(auto _ : state) {
 
@@ -418,3 +425,26 @@ static void Small_multimapEmpty(State& state) {
 }
 
 BENCHMARK(Small_multimapEmpty)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+
+static void Small_multimapSize(State& state) {
+
+    auto N = state.range(0);
+    auto size = (std::size_t)N;
+
+    std::multimap<Small, int> multimap{};
+
+    for(std::size_t i = 0; i < size; i++) {
+        Small inserted{};
+        inserted.randomize();
+        multimap.insert({ inserted, i });
+    }
+
+    for(auto _ : state) {
+
+        multimap.size();
+    }
+
+    state.SetComplexityN(N);
+}
+
+BENCHMARK(Small_multimapSize)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
