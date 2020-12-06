@@ -790,14 +790,14 @@ static void Small_unorderedMultimapMaxSize(State& state) {
 
 BENCHMARK(Small_unorderedMultimapMaxSize)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
 
-static void Small_unorderedMultimapInsertN(State& state) {  //  TODO Dlaczego O(n) zamiast O(1) ???????
+static void Small_unorderedMultimapInsertN(State& state) {
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
 
-    std::unordered_multimap<Small, int> uMultimap{};
-
     for(auto _ : state) {
+
+        std::unordered_multimap<Small, int> uMultimap{};
 
         for(std::size_t i = 0; i < size; i++) {
 
@@ -817,9 +817,9 @@ static void Small_unorderedMultimapClear(State& state) {
     auto N = state.range(0);
     auto size = (std::size_t)N;
 
-    std::unordered_multimap<Small, int> uMultimap{};
-
     for(auto _ : state) {
+
+        std::unordered_multimap<Small, int> uMultimap{};
 
         for(std::size_t i = 0; i < size; i++) {
 
