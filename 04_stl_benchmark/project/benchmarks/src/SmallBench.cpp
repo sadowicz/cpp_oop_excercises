@@ -942,3 +942,29 @@ static void Small_unorderedMultimapFind(State& state) {
 }
 
 BENCHMARK(Small_unorderedMultimapFind)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+
+static void Small_unorderedMultimapEqualRange(State& state) {   // powod liniowosci taki sam jak w Small_unorderedMultimapCount
+
+    auto N = state.range(0);
+    auto size = (std::size_t)N;
+
+    std::unordered_multimap<Small, int> uMultimap{};
+
+    for(std::size_t i = 0; i < size; i++) {
+
+        Small inserted{};
+        inserted.randomize();
+        uMultimap.insert({inserted, i});
+    }
+
+    for(auto _ : state) {
+
+        Small searched{};
+        searched.randomize();
+        uMultimap.equal_range(searched);
+    }
+
+    state.SetComplexityN(N);
+}
+
+BENCHMARK(Small_unorderedMultimapEqualRange)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
