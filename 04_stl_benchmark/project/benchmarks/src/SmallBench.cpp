@@ -1,6 +1,7 @@
 #include <forward_list>
 #include <map>
 #include <ctime>
+#include <unordered_map>
 
 #include "Small.h"
 #include "BenchIncludes.h"
@@ -401,7 +402,11 @@ static void Small_forwardListRemoveIf(State& state) {
 
 BENCHMARK(Small_forwardListRemoveIf)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
 
-// MULTIMAP BENCHMARKS
+
+
+// MULTIMAP BENCHMARKS  ===============================================================================================
+
+
 
 static void Small_multimapEmpty(State& state) {
 
@@ -532,7 +537,7 @@ static void Small_multimapInsertErase(State& state) { // TODO Dla .randomized da
     for(auto _ : state) {
 
         Small inserted{};
-        //inserted.randomize();   // brak wplywu na zlozonosc
+        inserted.randomize();  // brak wplywu na zlozonosc
         multimap.insert({ inserted, 0 });
         multimap.erase(inserted);
     }
@@ -704,3 +709,33 @@ static void Small_multimapUpperBound(State& state) {
 }
 
 BENCHMARK(Small_multimapUpperBound)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+
+
+
+//  UNORDERED MULTIMAP BENCHMARK    ====================================================================================
+
+
+
+static void Small_unorderedMultimapEmpty(State& state) {
+
+    auto N = state.range(0);
+    auto size = (std::size_t)N;
+
+    std::unordered_multimap<Small, int> uMultimap{};
+
+    for(std::size_t i = 0; i < size; i++) {
+
+        Small inserted{};
+        inserted.randomize();
+        uMultimap.insert({inserted, i});
+    }
+
+    for(auto _ : state) {
+
+        uMultimap.empty();
+    }
+
+    state.SetComplexityN(N);
+}
+
+BENCHMARK(Small_unorderedMultimapEmpty)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
