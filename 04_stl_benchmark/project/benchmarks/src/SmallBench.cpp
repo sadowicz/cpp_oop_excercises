@@ -968,3 +968,31 @@ static void Small_unorderedMultimapEqualRange(State& state) {   // powod liniowo
 }
 
 BENCHMARK(Small_unorderedMultimapEqualRange)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+
+static void Small_unorderedMultimapRehash(State& state) {
+
+    auto N = state.range(0);
+    auto size = (std::size_t)N;
+
+    srand(time(nullptr));
+
+    std::unordered_multimap<Small, int> uMultimap{};
+
+    for(std::size_t i = 0; i < size; i++) {
+
+        Small inserted{};
+        inserted.randomize();
+        uMultimap.insert({inserted, i});
+    }
+
+    uMultimap.max_load_factor(1000);    // bo przekraczanie max_load_factor powodowalo zlozonosc < O(n) z duzym bledem
+
+    for(auto _ : state) {
+
+        uMultimap.rehash(rand() % 255 + 1);
+    }
+
+    state.SetComplexityN(N);
+}
+
+BENCHMARK(Small_unorderedMultimapRehash)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
