@@ -890,3 +890,29 @@ static void Small_unorderedMultimapSwap(State& state) {
 }
 
 BENCHMARK(Small_unorderedMultimapSwap)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+
+static void Small_unorderedMultimapCount(State& state) {    // wychodzi O(n) bo im wieksze N tym czesciej klucze
+                                                            // sie powtarzaja, a zlozonosc .count() jest liniowa w obrebie
+    auto N = state.range(0);                           // tego samego klucza, wiec dla wiekszej ilosci powtorzen
+    auto size = (std::size_t)N;                             // mierzony jest wiekszy czas. Zatem zlozonosc jest posrednio
+                                                            // zalezna od N
+    std::unordered_multimap<Small, int> uMultimap{};
+
+    for(std::size_t i = 0; i < size; i++) {
+
+        Small inserted{};
+        inserted.randomize();
+        uMultimap.insert({inserted, i});
+    }
+
+    for(auto _ : state) {
+
+        Small inserted{};
+        inserted.randomize();
+        uMultimap.count(inserted);
+    }
+
+    state.SetComplexityN(N);
+}
+
+BENCHMARK(Small_unorderedMultimapCount)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
