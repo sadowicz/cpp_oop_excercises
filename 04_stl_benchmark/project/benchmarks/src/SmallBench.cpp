@@ -597,3 +597,29 @@ static void Small_multimapCount(State& state) { // TODO Dla zasiegu wiekszego ni
 
 BENCHMARK(Small_multimapCount)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
+static void Small_multimapFind(State& state) {
+
+    auto N = state.range(0);
+    auto size = (std::size_t)N;
+
+    std::multimap<Small, int> multimap{};
+
+    for(std::size_t i = 0; i < size; i++) {
+
+        Small inserted{};
+        inserted.randomize();
+        multimap.insert({ inserted, i });
+    }
+
+    Small searched{};
+    searched.randomize();
+
+    for(auto _ : state) {
+
+        multimap.find(searched);
+    }
+
+    state.SetComplexityN(N);
+}
+
+BENCHMARK(Small_multimapFind)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
