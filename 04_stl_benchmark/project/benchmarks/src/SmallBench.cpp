@@ -985,11 +985,11 @@ static void Small_unorderedMultimapRehash(State& state) {
         uMultimap.insert({inserted, i});
     }
 
-    uMultimap.max_load_factor(1000);    // bo przekraczanie max_load_factor powodowalo zlozonosc < O(n) z duzym bledem
+    uMultimap.max_load_factor(size);    // bo przekraczanie max_load_factor powodowalo zlozonosc < O(n) z duzym bledem
 
     for(auto _ : state) {
 
-        uMultimap.rehash(rand() % 255 + 1);
+        uMultimap.rehash(rand() % size + 1);
     }
 
     state.SetComplexityN(N);
