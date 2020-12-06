@@ -996,3 +996,30 @@ static void Small_unorderedMultimapRehash(State& state) {
 }
 
 BENCHMARK(Small_unorderedMultimapRehash)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+
+static void Small_unorderedMultimapReserve(State& state) {
+
+    auto N = state.range(0);
+    auto size = (std::size_t)N;
+
+    srand(time(nullptr));
+
+    std::unordered_multimap<Small, int> uMultimap{};
+
+    for(std::size_t i = 0; i < size; i++) {
+
+        Small inserted{};
+        inserted.randomize();
+        uMultimap.insert({inserted, i});
+    }
+
+    for(auto _ : state) {
+
+        uMultimap.max_load_factor(rand() % size + 1);    // O(1) - brak wplywu na zlozonosc
+        uMultimap.reserve(size);
+    }
+
+    state.SetComplexityN(N);
+}
+
+BENCHMARK(Small_unorderedMultimapReserve)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
