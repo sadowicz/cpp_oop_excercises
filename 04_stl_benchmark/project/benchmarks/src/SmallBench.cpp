@@ -862,3 +862,31 @@ static void Small_unorderedMultimapInsertErase(State& state) {
 }
 
 BENCHMARK(Small_unorderedMultimapInsertErase)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+
+static void Small_unorderedMultimapSwap(State& state) {
+
+    auto N = state.range(0);
+    auto size = (std::size_t)N;
+
+    std::unordered_multimap<Small, int> uMultimap1{};
+    std::unordered_multimap<Small, int> uMultimap2{};
+
+    for(std::size_t i = 0; i < size; i++) {
+
+        Small inserted1{};
+        Small inserted2{};
+        inserted1.randomize();
+        inserted2.randomize();
+        uMultimap1.insert({inserted1, i});
+        uMultimap2.insert({inserted2, i + 1});
+    }
+
+    for(auto _ : state) {
+
+        uMultimap1.swap(uMultimap2);
+    }
+
+    state.SetComplexityN(N);
+}
+
+BENCHMARK(Small_unorderedMultimapSwap)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
