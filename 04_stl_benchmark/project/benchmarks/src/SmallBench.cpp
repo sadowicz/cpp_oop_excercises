@@ -787,3 +787,27 @@ static void Small_unorderedMultimapMaxSize(State& state) {
 }
 
 BENCHMARK(Small_unorderedMultimapMaxSize)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+
+static void Small_unorderedMultimapClear(State& state) {
+
+    auto N = state.range(0);
+    auto size = (std::size_t)N;
+
+    std::unordered_multimap<Small, int> uMultimap{};
+
+    for(auto _ : state) {
+
+        for(std::size_t i = 0; i < size; i++) {
+
+            Small inserted{};
+            inserted.randomize();
+            uMultimap.insert({inserted, i});
+        }
+
+        uMultimap.clear();
+    }
+
+    state.SetComplexityN(N);
+}
+
+BENCHMARK(Small_unorderedMultimapClear)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
