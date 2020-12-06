@@ -597,13 +597,3 @@ static void Small_multimapCount(State& state) { // TODO Dla zasiegu wiekszego ni
 
 BENCHMARK(Small_multimapCount)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
-static void Small_randomize(State& state) {
-
-    for(auto _ : state) {
-
-        Small small{};
-        small.randomize();
-    }
-}
-
-BENCHMARK(Small_randomize);
