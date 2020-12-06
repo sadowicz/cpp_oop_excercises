@@ -650,3 +650,30 @@ static void Small_multimapEqualRange(State& state) {
 }
 
 BENCHMARK(Small_multimapEqualRange)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+
+static void Small_multimapLowerBound(State& state) {
+
+    auto N = state.range(0);
+    auto size = (std::size_t)N;
+
+    std::multimap<Small, int> multimap{};
+
+    for(std::size_t i = 0; i < size; i++) {
+
+        Small inserted{};
+        inserted.randomize();
+        multimap.insert({ inserted, i });
+    }
+
+    Small searched{};
+    searched.randomize();
+
+    for(auto _ : state) {
+
+        multimap.lower_bound(searched);
+    }
+
+    state.SetComplexityN(N);
+}
+
+BENCHMARK(Small_multimapLowerBound)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
