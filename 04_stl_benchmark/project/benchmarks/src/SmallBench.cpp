@@ -730,7 +730,8 @@ static void Small_unorderedMultimapEmpty(State& state) {
 
     for(auto _ : state) {
 
-        uMultimap.empty();
+        auto res = uMultimap.empty();
+        DoNotOptimize(res);
     }
 
     state.SetComplexityN(N);
@@ -754,7 +755,8 @@ static void Small_unorderedMultimapSize(State& state) {
 
     for(auto _ : state) {
 
-        uMultimap.size();
+        auto res = uMultimap.size();
+        DoNotOptimize(res);
     }
 
     state.SetComplexityN(N);
@@ -778,7 +780,8 @@ static void Small_unorderedMultimapMaxSize(State& state) {
 
     for(auto _ : state) {
 
-        uMultimap.max_size();
+        auto res = uMultimap.max_size();
+        DoNotOptimize(res);
     }
 
     state.SetComplexityN(N);
@@ -892,7 +895,7 @@ static void Small_unorderedMultimapCount(State& state) {    // wychodzi O(n) bo 
     auto N = state.range(0);                           // tego samego klucza, wiec dla wiekszej ilosci powtorzen
     auto size = (std::size_t)N;                             // mierzony jest wiekszy czas. Zatem zlozonosc jest posrednio
                                                             // zalezna od N
-    std::unordered_multimap<Small, int> uMultimap{};
+    std::unordered_multimap<Small, int> uMultimap{};        // TODO Dlaczego dla range > 1u << 14u zlozonosc > O(N) w release???
 
     for(std::size_t i = 0; i < size; i++) {
 
@@ -911,7 +914,7 @@ static void Small_unorderedMultimapCount(State& state) {    // wychodzi O(n) bo 
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_unorderedMultimapCount)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Small_unorderedMultimapCount)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
 static void Small_unorderedMultimapFind(State& state) {
 
@@ -963,9 +966,9 @@ static void Small_unorderedMultimapEqualRange(State& state) {   // powod liniowo
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_unorderedMultimapEqualRange)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Small_unorderedMultimapEqualRange)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
-static void Small_unorderedMultimapRehash(State& state) {
+static void Small_unorderedMultimapRehash(State& state) {   // TODO: Dlaczego dla release O(NlogN) a dla debug O(N) ????
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
@@ -993,7 +996,7 @@ static void Small_unorderedMultimapRehash(State& state) {
 
 BENCHMARK(Small_unorderedMultimapRehash)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
 
-static void Small_unorderedMultimapReserve(State& state) {
+static void Small_unorderedMultimapReserve(State& state) {  // TODO: Dlaczego dla release O(NlogN) a dla debug O(N) ????
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
