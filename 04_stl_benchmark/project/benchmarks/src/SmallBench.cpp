@@ -276,7 +276,7 @@ static void Small_forwardListSort(State& state) {   // - 1 * RandomizeElements
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_forwardListSort)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Small_forwardListSort)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
 static void Small_forwardListMerge(State& state) {  //  - 2 * sort
 
@@ -309,7 +309,7 @@ static void Small_forwardListMerge(State& state) {  //  - 2 * sort
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_forwardListMerge)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Small_forwardListMerge)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
 static void Small_forwardListSpliceAfter(State& state) {
 
@@ -328,7 +328,7 @@ static void Small_forwardListSpliceAfter(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_forwardListSpliceAfter)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Small_forwardListSpliceAfter)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
 static void Small_forwardListReverse(State& state) {    // TODO Why O(NlogN) and not O(N)
 
@@ -345,7 +345,7 @@ static void Small_forwardListReverse(State& state) {    // TODO Why O(NlogN) and
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_forwardListReverse)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Small_forwardListReverse)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
 static void Small_forwardListUnique(State& state) {
 
@@ -379,7 +379,7 @@ static void Small_forwardListRemove(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_forwardListRemove)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Small_forwardListRemove)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
 static void Small_forwardListRemoveIf(State& state) {
 
@@ -395,7 +395,7 @@ static void Small_forwardListRemoveIf(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_forwardListRemoveIf)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Small_forwardListRemoveIf)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
 
 
