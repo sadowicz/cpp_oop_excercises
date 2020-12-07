@@ -11,7 +11,8 @@ static void Large_LessThan(State& state) {
 
     for(auto _ : state) {
 
-        a < b;
+        bool res = a < b;
+        DoNotOptimize(res);
     }
 }
 
@@ -27,7 +28,8 @@ static void Large_Equality(State& state) {
 
     for(auto _ : state) {
 
-        a == b;
+        bool res = a == b;
+        DoNotOptimize(res);
     }
 }
 
@@ -41,7 +43,8 @@ static void Large_Hash(State& state) {
 
     for(auto _ : state) {
 
-        std::hash<Large>{}(a);
+        auto res = std::hash<Large>{}(a);
+        DoNotOptimize(res);
     }
 }
 

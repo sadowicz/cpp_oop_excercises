@@ -11,7 +11,8 @@ static void Medium_LessThan(State& state) {
 
     for(auto _ : state) {
 
-        a < b;
+        bool res = a < b;
+        DoNotOptimize(res);
     }
 }
 
@@ -27,7 +28,8 @@ static void Medium_Equality(State& state) {
 
     for(auto _ : state) {
 
-        a == b;
+        bool res = a == b;
+        DoNotOptimize(res);
     }
 }
 
@@ -41,7 +43,8 @@ static void Medium_Hash(State& state) {
 
     for(auto _ : state) {
 
-        std::hash<Medium>{}(a);
+        auto res = std::hash<Medium>{}(a);
+        DoNotOptimize(res);
     }
 }
 

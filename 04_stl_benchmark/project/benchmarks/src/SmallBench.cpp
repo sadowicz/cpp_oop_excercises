@@ -19,7 +19,8 @@ static void Small_LessThan(State& state) {
 
     for(auto _ : state) {
 
-        a < b;
+        bool res = a < b;
+        DoNotOptimize(res);
     }
 }
 
@@ -35,7 +36,8 @@ static void Small_Equality(State& state) {
 
     for(auto _ : state) {
 
-        a == b;
+        bool res = a == b;
+        DoNotOptimize(res);
     }
 }
 
@@ -48,7 +50,8 @@ static void Small_Hash(State& state) {
 
     for(auto _ : state) {
 
-        std::hash<Small>{}(a);
+        auto res = std::hash<Small>{}(a);
+        DoNotOptimize(res);
     }
 }
 
