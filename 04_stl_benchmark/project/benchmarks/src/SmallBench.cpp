@@ -418,7 +418,8 @@ static void Small_multimapEmpty(State& state) {
 
     for(auto _ : state) {
 
-        multimap.empty();
+        auto res = multimap.empty();
+        DoNotOptimize(res);
     }
 
     state.SetComplexityN(N);
@@ -441,7 +442,8 @@ static void Small_multimapSize(State& state) {
 
     for(auto _ : state) {
 
-        multimap.size();
+        auto res = multimap.size();
+        DoNotOptimize(res);
     }
 
     state.SetComplexityN(N);
@@ -464,7 +466,8 @@ static void Small_multimapMaxSize(State& state) {
 
     for(auto _ : state) {
 
-        multimap.max_size();
+        auto res = multimap.max_size();
+        DoNotOptimize(res);
     }
 
     state.SetComplexityN(N);
