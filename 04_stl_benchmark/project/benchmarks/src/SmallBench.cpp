@@ -68,7 +68,8 @@ static void Small_forwardListFront(State& state) {
 
     for(auto _ : state) {
 
-        fList.front();
+        auto res = fList.front();
+        DoNotOptimize(res);
     }
 
     state.SetComplexityN(N);
@@ -85,7 +86,8 @@ static void Small_forwardListEmpty(State& state) {
 
     for(auto _ : state) {
 
-        fList.empty();
+        auto res = fList.empty();
+        DoNotOptimize(res);
     }
 
     state.SetComplexityN(N);
@@ -102,7 +104,8 @@ static void Small_forwardListMaxSize(State& state) {
 
     for(auto _ : state) {
 
-        fList.max_size();
+        auto res = fList.max_size();
+        DoNotOptimize(res);
     }
 
     state.SetComplexityN(N);
@@ -118,6 +121,7 @@ static void Small_forwardListCreate(State& state) {
     for(auto _ : state) {
 
         std::forward_list<Small> fList{size};
+        DoNotOptimize(fList);
     }
 
     state.SetComplexityN(N);
@@ -125,7 +129,7 @@ static void Small_forwardListCreate(State& state) {
 
 BENCHMARK(Small_forwardListCreate)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
 
-static void Small_forwardListCreateAndClear(State& state) {
+static void Small_forwardListCreateAndClear(State& state) { // - forwardListCreate ( baseline )
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
@@ -133,6 +137,8 @@ static void Small_forwardListCreateAndClear(State& state) {
     for(auto _ : state) {
 
         std::forward_list<Small> fList{size};
+        DoNotOptimize(fList);
+
         fList.clear();
     }
 
@@ -146,6 +152,7 @@ static void Small_Rand(State& state) {
     for(auto _ : state) {
 
         auto number = rand() % 100;
+        DoNotOptimize(number);
     }
 }
 
@@ -304,23 +311,6 @@ static void Small_forwardListMerge(State& state) {  //  - 2 * sort
 
 BENCHMARK(Small_forwardListMerge)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
 
-static void Small_forwardListBegin(State& state) {
-
-    auto N = state.range(0);
-    auto size = (std::size_t)N;
-
-    std::forward_list<Small> fList{size};
-
-    for(auto _ : state) {
-
-        fList.begin();
-    }
-
-    state.SetComplexityN(N);
-}
-
-BENCHMARK(Small_forwardListBegin)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
-
 static void Small_forwardListSpliceAfter(State& state) {
 
     auto N = state.range(0);
@@ -332,7 +322,7 @@ static void Small_forwardListSpliceAfter(State& state) {
 
         std::forward_list<Small> fList1{size};
 
-        fList1.splice_after(fList1.begin(), fList2);
+        fList1.splice_after(fList1.begin(), fList2);    // .begin() O(1) nie wplywa na zlozonosc
     }
 
     state.SetComplexityN(N);
@@ -340,7 +330,7 @@ static void Small_forwardListSpliceAfter(State& state) {
 
 BENCHMARK(Small_forwardListSpliceAfter)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
 
-static void Small_forwardListReverse(State& state) {
+static void Small_forwardListReverse(State& state) {    // TODO Why O(NlogN) and not O(N)
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
