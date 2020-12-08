@@ -60,16 +60,16 @@ int main()
         observer::Displacement displacement;
 
         observer::Speed speed;
-        //observer::Acceleration acceleration;
+        observer::Acceleration acceleration;
 
         displacement.registerObserver(&speed);
-        //displacement.registerObserver(&acceleration);
+        displacement.registerObserver(&acceleration);
 
         displacement.set(10);
         displacement.set(11);
         displacement.set(13);
 
-        std::cout << "Result: speed: " << speed.get() << ", acceleration: ";// << acceleration.get();
+        std::cout << "Result: speed: " << speed.get() << ", acceleration: " << acceleration.get();
     }
 
     return 0;

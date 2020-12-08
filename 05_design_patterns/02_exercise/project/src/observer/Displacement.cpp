@@ -4,5 +4,4 @@ void observer::Displacement::set(float value) {
 
     this->value = value;
     notifyObservers(this->value);
-
 }
