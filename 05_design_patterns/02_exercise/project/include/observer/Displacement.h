@@ -7,7 +7,7 @@ namespace observer {
     class Displacement : public observer::Observable {
 
     public:
-        void set(float value) { this->value = value; }
+        void set(float value);
 
     private:
         float value;
