@@ -11,7 +11,6 @@ add_library(utils
         include/observer/Acceleration.h
         src/observer/Acceleration.cpp
         include/observer/Displacement.h
-        src/observer/Displacement.cpp
         include/observer/Speed.h
         src/observer/Speed.cpp)
 
