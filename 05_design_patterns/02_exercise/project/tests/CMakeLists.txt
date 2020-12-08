@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.16)
 
 add_executable(tests
-        src/CalculatorTest.cpp)
+        src/CalculatorTest.cpp
+        src/ObserverTest.cpp)
 
 target_link_libraries(tests PRIVATE utils)
 
