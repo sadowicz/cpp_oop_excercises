@@ -4,16 +4,16 @@ pipelines:
   default:
     - step:
         script:
-          - pushd 04_stl_benchmark/project
-          -   pushd externals/
-          -     git clone --depth=1 --branch=release-1.10.0 https://github.com/google/googletest.git
-          -     rm -rf googletest/.git
-          -     git clone --depth=1 --branch=v1.5.2 https://github.com/google/benchmark.git
-          -     rm -rf benchmark/.git
-          -   popd
-          -   mkdir build && pushd build
-          -     cmake ../ && make -j4
-          -     tests/tests --gtest_output=xml
-          -   popd
+          - pushd 05_design_patterns/02_exercise/
+          -   git clone --depth=1 --branch=release-1.10.0 https://github.com/google/googletest.git
+          -   rm -rf googletest/.git
+          -   pushd googletest && mkdir build && pushd build
+          -       cmake ../ && make -j4
+          -   popd && popd
+          -   pushd project && mkdir build && pushd build
+          -       cmake ../ && make -j4
+          -       ./runner
+          -       tests/tests --gtest_output=xml
+          -   popd && popd
           - popd
           - .ci/collect_reports.sh
