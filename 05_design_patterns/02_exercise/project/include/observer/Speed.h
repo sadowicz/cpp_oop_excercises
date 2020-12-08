@@ -12,10 +12,10 @@ namespace observer {
         void notify(float value) override;
 
     private:
-        bool hasFirstValue;
-        bool hasSecondValue;
+        bool hasFirstValue{};
+        bool hasSecondValue{};
 
-        float firstValue;
-        float secondValue;
+        float firstValue{};
+        float secondValue{};
     };
 }
