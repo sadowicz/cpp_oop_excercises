@@ -1,8 +1,10 @@
-//
-// Created by student on 12/8/20.
-//
+#pragma once
 
-#ifndef PROJECT_OBSERVER_H
-#define PROJECT_OBSERVER_H
+namespace observer {
 
-#endif //PROJECT_OBSERVER_H
+    class Observer {
+
+    public:
+        virtual void notify(float value) = 0;
+    };
+}
