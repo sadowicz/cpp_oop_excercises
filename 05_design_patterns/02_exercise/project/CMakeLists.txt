@@ -4,7 +4,16 @@ project(project)
 
 add_library(utils
         include/Calculator.h
-        src/Calculator.cpp)
+        src/Calculator.cpp
+        include/observer/Observer.h
+        include/observer/Observable.h
+        src/observer/Observable.cpp
+        include/observer/Acceleration.h
+        src/observer/Acceleration.cpp
+        include/observer/Displacement.h
+        src/observer/Displacement.cpp
+        include/observer/Speed.h
+        src/observer/Speed.cpp)
 
 target_include_directories(utils PUBLIC include)
 
