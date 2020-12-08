@@ -1,8 +1,20 @@
-//
-// Created by student on 12/8/20.
-//
+#pragma once
 
-#ifndef PROJECT_OBSERVABLE_H
-#define PROJECT_OBSERVABLE_H
+#include <set>
+#include "observer/Observer.h"
 
-#endif //PROJECT_OBSERVABLE_H
+namespace observer {
+
+    class Observable {
+
+    public:
+        void registerObserver(Observer* observer);
+        void unregisterObserver(Observer* observer);
+
+    protected:
+        void notifyObservers(float value);
+
+    private:
+        std::set<Observer*> observers;
+    };
+}
