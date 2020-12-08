@@ -5,6 +5,7 @@ project(project)
 add_library(utils
         include/Calculator.h
         src/Calculator.cpp
+
         include/observer/Observer.h
         include/observer/Observable.h
         src/observer/Observable.cpp
@@ -13,7 +14,21 @@ add_library(utils
         include/observer/Displacement.h
         src/observer/Displacement.cpp
         include/observer/Speed.h
-        src/observer/Speed.cpp)
+        src/observer/Speed.cpp
+
+        include/factory/gui/Widget.h
+        include/factory/gui/CheckBoxKdeWidget.h
+        src/factory/gui/CheckBoxKdeWidget.cpp
+        include/factory/gui/ListKdeWidget.h
+        src/factory/gui/ListKdeWidget.cpp
+        include/factory/gui/ButtonKdeWidget.h
+        src/factory/gui/ButtonKdeWidget.cpp
+        include/factory/gui/CheckBoxGnomeWidget.h
+        src/factory/gui/CheckBoxGnomeWidget.cpp
+        include/factory/gui/ListGnomeWidget.h
+        src/factory/gui/ListGnomeWidget.cpp
+        include/factory/gui/ButtonGnomeWidget.h
+        src/factory/gui/ButtonGnomeWidget.cpp)
 
 target_include_directories(utils PUBLIC include)
 
