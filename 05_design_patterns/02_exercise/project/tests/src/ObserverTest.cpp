@@ -112,3 +112,75 @@ TEST(Observer_Speed, GetReturnsSpeedWhenMoreThanTwoValuesNotified) {
 
     EXPECT_EQ(1, speed.get());
 }
+
+TEST(Observer_Acceleration, GetIsUsable) {
+
+    observer::Displacement displacement;
+    observer::Acceleration acceleration;
+
+    displacement.registerObserver(&acceleration);
+    displacement.set(1);
+    displacement.set(2);
+    displacement.set(3);
+
+    acceleration.get();
+}
+
+TEST(Observer_Acceleration, GetThrowsExceptionWhenNoThirdValue) {
+
+    observer::Displacement displacement;
+    observer::Acceleration acceleration;
+
+    displacement.registerObserver(&acceleration);
+
+    EXPECT_THROW(acceleration.get(), std::logic_error);
+
+    displacement.set(1);
+
+    EXPECT_THROW(acceleration.get(), std::logic_error);
+
+    displacement.set(2);
+
+    EXPECT_THROW(acceleration.get(), std::logic_error);
+}
+
+TEST(Observer_Acceleration, NotifiesNoValuesWhenNotRegistered) {
+
+    observer::Displacement displacement;
+    observer::Acceleration acceleration;
+
+    displacement.set(1);
+    displacement.set(2);
+    displacement.set(3);
+
+    EXPECT_THROW(acceleration.get(), std::logic_error);
+}
+
+TEST(Observer_Acceleration, GetReturnsAccelerationWhenThreeValuesNotified) {
+
+    observer::Displacement displacement;
+    observer::Acceleration acceleration;
+
+    displacement.registerObserver(&acceleration);
+
+    displacement.set(1);
+    displacement.set(2);
+    displacement.set(5);
+
+    EXPECT_EQ(2, acceleration.get());
+}
+
+TEST(Observer_Acceleration, GetReturnsAccelerationWhenMoreThanThreeValuesNotified) {
+
+    observer::Displacement displacement;
+    observer::Acceleration acceleration;
+
+    displacement.registerObserver(&acceleration);
+
+    displacement.set(1);
+    displacement.set(3);
+    displacement.set(4);
+    displacement.set(8);
+
+    EXPECT_EQ(3, acceleration.get());
+}
