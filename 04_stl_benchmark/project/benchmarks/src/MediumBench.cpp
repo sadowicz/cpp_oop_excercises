@@ -5,6 +5,8 @@
 #include "Medium.h"
 #include "BenchIncludes.h"
 
+const int Medium_maxIter = 1u << 14u;
+
 static void Medium_LessThan(State& state) {
 
     Medium a{};
@@ -76,7 +78,7 @@ static void Medium_forwardListFront(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Medium_forwardListFront)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_forwardListFront)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
 static void Medium_forwardListEmpty(State& state) {
 
@@ -94,7 +96,7 @@ static void Medium_forwardListEmpty(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Medium_forwardListEmpty)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_forwardListEmpty)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
 static void Medium_forwardListMaxSize(State& state) {
 
@@ -112,7 +114,7 @@ static void Medium_forwardListMaxSize(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Medium_forwardListMaxSize)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_forwardListMaxSize)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
 static void Medium_forwardListCreate(State& state) {
 
@@ -128,7 +130,7 @@ static void Medium_forwardListCreate(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Medium_forwardListCreate)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_forwardListCreate)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
 static void Medium_forwardListCreateAndClear(State& state) { // - forwardListCreate ( baseline )
 
@@ -146,7 +148,7 @@ static void Medium_forwardListCreateAndClear(State& state) { // - forwardListCre
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Medium_forwardListCreateAndClear)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_forwardListCreateAndClear)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
 static void Medium_Rand(State& state) {
 
@@ -176,7 +178,7 @@ static void Medium_forwardListPushFrontPopFront(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Medium_forwardListPushFrontPopFront)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_forwardListPushFrontPopFront)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
 static void Medium_forwardListResizeToRand(State& state) {
 
@@ -196,7 +198,7 @@ static void Medium_forwardListResizeToRand(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Medium_forwardListResizeToRand)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_forwardListResizeToRand)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
 static void Medium_forwardListSwap(State& state) {
 
@@ -214,7 +216,7 @@ static void Medium_forwardListSwap(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Medium_forwardListSwap)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_forwardListSwap)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
 static void Medium_forwardListInsertAfterEraseAfter(State& state) {
 
@@ -235,7 +237,7 @@ static void Medium_forwardListInsertAfterEraseAfter(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Medium_forwardListInsertAfterEraseAfter)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_forwardListInsertAfterEraseAfter)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
 static void Medium_forwardListRandomizeElements(State& state) {
 
@@ -255,10 +257,10 @@ static void Medium_forwardListRandomizeElements(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Medium_forwardListRandomizeElements)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_forwardListRandomizeElements)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
 static void Medium_forwardListSort(State& state) {   // - 1 * RandomizeElements
-                                                    // TODO Dlaczego dla Medium O(N) zamiast O(NlogN) ???????
+
     auto N = state.range(0);
     auto size = (std::size_t)N;
 
@@ -277,7 +279,7 @@ static void Medium_forwardListSort(State& state) {   // - 1 * RandomizeElements
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Medium_forwardListSort)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
+BENCHMARK(Medium_forwardListSort)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
 static void Medium_forwardListMerge(State& state) {  //  - 2 * sort
 
@@ -310,7 +312,7 @@ static void Medium_forwardListMerge(State& state) {  //  - 2 * sort
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Medium_forwardListMerge)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
+BENCHMARK(Medium_forwardListMerge)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
 static void Medium_forwardListSpliceAfter(State& state) {
 
@@ -329,9 +331,9 @@ static void Medium_forwardListSpliceAfter(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Medium_forwardListSpliceAfter)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
+BENCHMARK(Medium_forwardListSpliceAfter)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
-static void Medium_forwardListReverse(State& state) {    // TODO Why O(NlogN) and not O(N)
+static void Medium_forwardListReverse(State& state) {
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
@@ -346,7 +348,7 @@ static void Medium_forwardListReverse(State& state) {    // TODO Why O(NlogN) an
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Medium_forwardListReverse)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
+BENCHMARK(Medium_forwardListReverse)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
 static void Medium_forwardListUnique(State& state) {
 
@@ -362,9 +364,9 @@ static void Medium_forwardListUnique(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Medium_forwardListUnique)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_forwardListUnique)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
-static void Medium_forwardListRemove(State& state) { // TODO Dlaczego O(NlogN) zamiast O(N)
+static void Medium_forwardListRemove(State& state) {
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
@@ -380,9 +382,9 @@ static void Medium_forwardListRemove(State& state) { // TODO Dlaczego O(NlogN) z
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Medium_forwardListRemove)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
+BENCHMARK(Medium_forwardListRemove)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
-static void Medium_forwardListRemoveIf(State& state) {  // TODO Dlaczego O(NlogN) zamiast O(N)
+static void Medium_forwardListRemoveIf(State& state) {
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
@@ -396,7 +398,7 @@ static void Medium_forwardListRemoveIf(State& state) {  // TODO Dlaczego O(NlogN
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Medium_forwardListRemoveIf)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
+BENCHMARK(Medium_forwardListRemoveIf)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
 
 
@@ -426,7 +428,7 @@ static void Medium_multimapEmpty(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Medium_multimapEmpty)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
+BENCHMARK(Medium_multimapEmpty)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
 static void Medium_multimapSize(State& state) {
 
@@ -450,7 +452,7 @@ static void Medium_multimapSize(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Medium_multimapSize)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
+BENCHMARK(Medium_multimapSize)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
 static void Medium_multimapMaxSize(State& state) {
 
@@ -474,7 +476,7 @@ static void Medium_multimapMaxSize(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Medium_multimapMaxSize)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
+BENCHMARK(Medium_multimapMaxSize)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
 static void Medium_multimapInsertN(State& state) {
 
@@ -495,7 +497,7 @@ static void Medium_multimapInsertN(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Medium_multimapInsertN)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
+BENCHMARK(Medium_multimapInsertN)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
 static void Medium_multimapClear(State& state) {  //trzeba odjac (baseline) InsertN
 
@@ -518,9 +520,9 @@ static void Medium_multimapClear(State& state) {  //trzeba odjac (baseline) Inse
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Medium_multimapClear)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
+BENCHMARK(Medium_multimapClear)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
-static void Medium_multimapInsertErase(State& state) { // TODO Dla .randomized daje O(1) zamiast O(logN), dlaczego ?????
+static void Medium_multimapInsertErase(State& state) {
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
@@ -536,7 +538,7 @@ static void Medium_multimapInsertErase(State& state) { // TODO Dla .randomized d
     for(auto _ : state) {
 
         Medium inserted{};
-        inserted.randomize();  // brak wplywu na zlozonosc
+        inserted.randomize();
         multimap.insert({ inserted, 0 });
         multimap.erase(inserted);
     }
@@ -544,7 +546,7 @@ static void Medium_multimapInsertErase(State& state) { // TODO Dla .randomized d
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Medium_multimapInsertErase)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
+BENCHMARK(Medium_multimapInsertErase)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
 static void Medium_multimapSwap(State& state) {
 
@@ -571,9 +573,9 @@ static void Medium_multimapSwap(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Medium_multimapSwap)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
+BENCHMARK(Medium_multimapSwap)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
-static void Medium_multimapCount(State& state) {    // TODO Dlaczego wychodzi O(1) ?????
+static void Medium_multimapCount(State& state) {
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
@@ -591,7 +593,7 @@ static void Medium_multimapCount(State& state) {    // TODO Dlaczego wychodzi O(
     for(auto _ : state) {
 
         Medium counted{};
-        counted.randomize();    // nie ma wplywu na zlozonosc
+        counted.randomize();
 
         multimap.count(counted);
     }
@@ -599,7 +601,7 @@ static void Medium_multimapCount(State& state) {    // TODO Dlaczego wychodzi O(
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Medium_multimapCount)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
+BENCHMARK(Medium_multimapCount)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
 static void Medium_multimapFind(State& state) {
 
@@ -626,7 +628,7 @@ static void Medium_multimapFind(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Medium_multimapFind)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
+BENCHMARK(Medium_multimapFind)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
 static void Medium_multimapEqualRange(State& state) {
 
@@ -653,7 +655,7 @@ static void Medium_multimapEqualRange(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Medium_multimapEqualRange)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
+BENCHMARK(Medium_multimapEqualRange)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
 static void Medium_multimapLowerBound(State& state) {
 
@@ -680,7 +682,7 @@ static void Medium_multimapLowerBound(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Medium_multimapLowerBound)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
+BENCHMARK(Medium_multimapLowerBound)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
 static void Medium_multimapUpperBound(State& state) {
 
@@ -707,24 +709,24 @@ static void Medium_multimapUpperBound(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Medium_multimapUpperBound)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
+BENCHMARK(Medium_multimapUpperBound)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
-/*
+
 
 //  UNORDERED MULTIMAP BENCHMARK    ====================================================================================
 
 
 
-static void Small_unorderedMultimapEmpty(State& state) {
+static void Medium_unorderedMultimapEmpty(State& state) {
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
 
-    std::unordered_multimap<Small, int> uMultimap{};
+    std::unordered_multimap<Medium, int> uMultimap{};
 
     for(std::size_t i = 0; i < size; i++) {
 
-        Small inserted{};
+        Medium inserted{};
         inserted.randomize();
         uMultimap.insert({inserted, i});
     }
@@ -738,18 +740,18 @@ static void Small_unorderedMultimapEmpty(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_unorderedMultimapEmpty)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_unorderedMultimapEmpty)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
-static void Small_unorderedMultimapSize(State& state) {
+static void Medium_unorderedMultimapSize(State& state) {
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
 
-    std::unordered_multimap<Small, int> uMultimap{};
+    std::unordered_multimap<Medium, int> uMultimap{};
 
     for(std::size_t i = 0; i < size; i++) {
 
-        Small inserted{};
+        Medium inserted{};
         inserted.randomize();
         uMultimap.insert({inserted, i});
     }
@@ -763,18 +765,18 @@ static void Small_unorderedMultimapSize(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_unorderedMultimapSize)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_unorderedMultimapSize)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
-static void Small_unorderedMultimapMaxSize(State& state) {
+static void Medium_unorderedMultimapMaxSize(State& state) {
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
 
-    std::unordered_multimap<Small, int> uMultimap{};
+    std::unordered_multimap<Medium, int> uMultimap{};
 
     for(std::size_t i = 0; i < size; i++) {
 
-        Small inserted{};
+        Medium inserted{};
         inserted.randomize();
         uMultimap.insert({inserted, i});
     }
@@ -788,20 +790,20 @@ static void Small_unorderedMultimapMaxSize(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_unorderedMultimapMaxSize)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_unorderedMultimapMaxSize)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
-static void Small_unorderedMultimapInsertN(State& state) {
+static void Medium_unorderedMultimapInsertN(State& state) {
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
 
     for(auto _ : state) {
 
-        std::unordered_multimap<Small, int> uMultimap{};
+        std::unordered_multimap<Medium, int> uMultimap{};
 
         for(std::size_t i = 0; i < size; i++) {
 
-            Small inserted{};
+            Medium inserted{};
             inserted.randomize();
             uMultimap.insert({inserted, i});
         }
@@ -810,20 +812,20 @@ static void Small_unorderedMultimapInsertN(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_unorderedMultimapInsertN)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_unorderedMultimapInsertN)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
-static void Small_unorderedMultimapClear(State& state) {
+static void Medium_unorderedMultimapClear(State& state) {
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
 
     for(auto _ : state) {
 
-        std::unordered_multimap<Small, int> uMultimap{};
+        std::unordered_multimap<Medium, int> uMultimap{};
 
         for(std::size_t i = 0; i < size; i++) {
 
-            Small inserted{};
+            Medium inserted{};
             inserted.randomize();
             uMultimap.insert({inserted, i});
         }
@@ -834,25 +836,25 @@ static void Small_unorderedMultimapClear(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_unorderedMultimapClear)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_unorderedMultimapClear)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
-static void Small_unorderedMultimapInsertErase(State& state) {
+static void Medium_unorderedMultimapInsertErase(State& state) {
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
 
-    std::unordered_multimap<Small, int> uMultimap{};
+    std::unordered_multimap<Medium, int> uMultimap{};
 
     for(std::size_t i = 0; i < size; i++) {
 
-        Small inserted{};
+        Medium inserted{};
         inserted.randomize();
         uMultimap.insert({inserted, i});
     }
 
     for(auto _ : state) {
 
-        Small inserted{};
+        Medium inserted{};
         inserted.randomize();
         uMultimap.insert({inserted, 0});
         uMultimap.erase(inserted);  // O(1), jeśli elementy sie nie powtarzają to podobnie do insert
@@ -861,20 +863,20 @@ static void Small_unorderedMultimapInsertErase(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_unorderedMultimapInsertErase)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_unorderedMultimapInsertErase)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
-static void Small_unorderedMultimapSwap(State& state) {
+static void Medium_unorderedMultimapSwap(State& state) {
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
 
-    std::unordered_multimap<Small, int> uMultimap1{};
-    std::unordered_multimap<Small, int> uMultimap2{};
+    std::unordered_multimap<Medium, int> uMultimap1{};
+    std::unordered_multimap<Medium, int> uMultimap2{};
 
     for(std::size_t i = 0; i < size; i++) {
 
-        Small inserted1{};
-        Small inserted2{};
+        Medium inserted1{};
+        Medium inserted2{};
         inserted1.randomize();
         inserted2.randomize();
         uMultimap1.insert({inserted1, i});
@@ -889,25 +891,25 @@ static void Small_unorderedMultimapSwap(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_unorderedMultimapSwap)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_unorderedMultimapSwap)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
-static void Small_unorderedMultimapCount(State& state) {    // wychodzi O(n) bo im wieksze N tym czesciej klucze
-    // sie powtarzaja, a zlozonosc .count() jest liniowa w obrebie
-    auto N = state.range(0);                           // tego samego klucza, wiec dla wiekszej ilosci powtorzen
-    auto size = (std::size_t)N;                             // mierzony jest wiekszy czas. Zatem zlozonosc jest posrednio
-    // zalezna od N
-    std::unordered_multimap<Small, int> uMultimap{};        // TODO Dlaczego dla range > 1u << 14u zlozonosc > O(N) w release???
+static void Medium_unorderedMultimapCount(State& state) {
+
+    auto N = state.range(0);
+    auto size = (std::size_t)N;
+
+    std::unordered_multimap<Medium, int> uMultimap{};
 
     for(std::size_t i = 0; i < size; i++) {
 
-        Small inserted{};
+        Medium inserted{};
         inserted.randomize();
         uMultimap.insert({inserted, i});
     }
 
     for(auto _ : state) {
 
-        Small counted{};
+        Medium counted{};
         counted.randomize();
         uMultimap.count(counted);
     }
@@ -915,25 +917,25 @@ static void Small_unorderedMultimapCount(State& state) {    // wychodzi O(n) bo 
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_unorderedMultimapCount)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
+BENCHMARK(Medium_unorderedMultimapCount)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
-static void Small_unorderedMultimapFind(State& state) {
+static void Medium_unorderedMultimapFind(State& state) {
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
 
-    std::unordered_multimap<Small, int> uMultimap{};
+    std::unordered_multimap<Medium, int> uMultimap{};
 
     for(std::size_t i = 0; i < size; i++) {
 
-        Small inserted{};
+        Medium inserted{};
         inserted.randomize();
         uMultimap.insert({inserted, i});
     }
 
     for(auto _ : state) {
 
-        Small searched{};
+        Medium searched{};
         searched.randomize();
         uMultimap.find(searched);
     }
@@ -941,25 +943,25 @@ static void Small_unorderedMultimapFind(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_unorderedMultimapFind)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_unorderedMultimapFind)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
-static void Small_unorderedMultimapEqualRange(State& state) {   // powod liniowosci taki sam jak w Small_unorderedMultimapCount
+static void Medium_unorderedMultimapEqualRange(State& state) {
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
 
-    std::unordered_multimap<Small, int> uMultimap{};
+    std::unordered_multimap<Medium, int> uMultimap{};
 
     for(std::size_t i = 0; i < size; i++) {
 
-        Small inserted{};
+        Medium inserted{};
         inserted.randomize();
         uMultimap.insert({inserted, i});
     }
 
     for(auto _ : state) {
 
-        Small searched{};
+        Medium searched{};
         searched.randomize();
         uMultimap.equal_range(searched);
     }
@@ -967,20 +969,20 @@ static void Small_unorderedMultimapEqualRange(State& state) {   // powod liniowo
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_unorderedMultimapEqualRange)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
+BENCHMARK(Medium_unorderedMultimapEqualRange)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
-static void Small_unorderedMultimapRehash(State& state) {   // TODO: Dlaczego dla release O(NlogN) a dla debug O(N) ????
+static void Medium_unorderedMultimapRehash(State& state) {
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
 
     srand(time(nullptr));
 
-    std::unordered_multimap<Small, int> uMultimap{};
+    std::unordered_multimap<Medium, int> uMultimap{};
 
     for(std::size_t i = 0; i < size; i++) {
 
-        Small inserted{};
+        Medium inserted{};
         inserted.randomize();
         uMultimap.insert({inserted, i});
     }
@@ -995,20 +997,20 @@ static void Small_unorderedMultimapRehash(State& state) {   // TODO: Dlaczego dl
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_unorderedMultimapRehash)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_unorderedMultimapRehash)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
 
-static void Small_unorderedMultimapReserve(State& state) {  // TODO: Dlaczego dla release O(NlogN) a dla debug O(N) ????
+static void Medium_unorderedMultimapReserve(State& state) {
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
 
     srand(time(nullptr));
 
-    std::unordered_multimap<Small, int> uMultimap{};
+    std::unordered_multimap<Medium, int> uMultimap{};
 
     for(std::size_t i = 0; i < size; i++) {
 
-        Small inserted{};
+        Medium inserted{};
         inserted.randomize();
         uMultimap.insert({inserted, i});
     }
@@ -1022,5 +1024,4 @@ static void Small_unorderedMultimapReserve(State& state) {  // TODO: Dlaczego dl
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_unorderedMultimapReserve)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
- */
+BENCHMARK(Medium_unorderedMultimapReserve)->RangeMultiplier(2)->Range(1u, Medium_maxIter)->Complexity();
