@@ -10,10 +10,10 @@ namespace factory {
 
     namespace gui {
 
-        class GnomeWidgetFactory : WidgetFactory {
+        class GnomeWidgetFactory : public WidgetFactory {
 
         public:
-            explicit GnomeWidgetFactory(int kdeVersion);
+            explicit GnomeWidgetFactory(int gnomeVersion);
             std::shared_ptr<Widget> create(std::string type) override;
 
         private:

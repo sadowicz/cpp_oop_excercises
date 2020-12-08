@@ -33,7 +33,9 @@ add_library(utils
         include/factory/gui/KdeWidgetFactory.h
         src/factory/gui/KdeWidgetFactory.cpp
         include/factory/gui/GnomeWidgetFactory.h
-        src/factory/gui/GnomeWidgetFactory.cpp)
+        src/factory/gui/GnomeWidgetFactory.cpp
+        include/factory/gui/Demo.h
+        src/factory/gui/Demo.cpp)
 
 target_include_directories(utils PUBLIC include)
 

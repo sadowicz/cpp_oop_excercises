@@ -1,6 +1,6 @@
 #include "factory/gui/GnomeWidgetFactory.h"
 
-factory::gui::GnomeWidgetFactory::GnomeWidgetFactory(int kdeVersion) : gnomeVersion{gnomeVersion} {}
+factory::gui::GnomeWidgetFactory::GnomeWidgetFactory(int gnomeVersion) : gnomeVersion{gnomeVersion} {}
 
 std::shared_ptr<factory::gui::Widget> factory::gui::GnomeWidgetFactory::create(std::string type) {
 

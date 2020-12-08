@@ -4,11 +4,11 @@
 //#include "factory/executor/CpuCoreFactory.h"
 //#include "factory/executor/CudaCoreFactory.h"
 //#include "factory/executor/Demo.h"
-//
-//#include "factory/gui/GnomeWidgetFactory.h"
-//#include "factory/gui/KdeWidgetFactory.h"
-//#include "factory/gui/Demo.h"
-//
+
+#include "factory/gui/GnomeWidgetFactory.h"
+#include "factory/gui/KdeWidgetFactory.h"
+#include "factory/gui/Demo.h"
+
 #include "observer/Acceleration.h"
 #include "observer/Displacement.h"
 #include "observer/Speed.h"
@@ -38,24 +38,24 @@ int main()
 //        demo->run("anisotropic");
 //    }
 //
-//    {
-//        auto factory = std::make_shared<factory::gui::GnomeWidgetFactory>(2);
-//        auto demo = std::make_shared<factory::gui::Demo>(factory);
-//
-//        demo->run("button");
-//        demo->run("list");
-//        demo->run("check_box");
-//    }
-//
-//    {
-//        auto factory = std::make_shared<factory::gui::KdeWidgetFactory>(3);
-//        auto demo = std::make_shared<factory::gui::Demo>(factory);
-//
-//        demo->run("button");
-//        demo->run("list");
-//        demo->run("check_box");
-//    }
-//
+    {
+        auto factory = std::make_shared<factory::gui::GnomeWidgetFactory>(2);
+        auto demo = std::make_shared<factory::gui::Demo>(factory);
+
+        demo->run("button");
+        demo->run("list");
+        demo->run("check_box");
+    }
+
+    {
+        auto factory = std::make_shared<factory::gui::KdeWidgetFactory>(3);
+        auto demo = std::make_shared<factory::gui::Demo>(factory);
+
+        demo->run("button");
+        demo->run("list");
+        demo->run("check_box");
+    }
+
     {
         observer::Displacement displacement;
 

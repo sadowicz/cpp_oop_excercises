@@ -10,7 +10,7 @@ namespace factory {
 
     namespace gui {
 
-        class KdeWidgetFactory : WidgetFactory {
+        class KdeWidgetFactory : public WidgetFactory {
 
         public:
             explicit KdeWidgetFactory(int kdeVersion);
