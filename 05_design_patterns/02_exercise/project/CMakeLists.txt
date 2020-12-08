@@ -28,7 +28,12 @@ add_library(utils
         include/factory/gui/ListGnomeWidget.h
         src/factory/gui/ListGnomeWidget.cpp
         include/factory/gui/ButtonGnomeWidget.h
-        src/factory/gui/ButtonGnomeWidget.cpp)
+        src/factory/gui/ButtonGnomeWidget.cpp
+        include/factory/gui/WidgetFactory.h
+        include/factory/gui/KdeWidgetFactory.h
+        src/factory/gui/KdeWidgetFactory.cpp
+        include/factory/gui/GnomeWidgetFactory.h
+        src/factory/gui/GnomeWidgetFactory.cpp)
 
 target_include_directories(utils PUBLIC include)
 

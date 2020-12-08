@@ -6,4 +6,3 @@ void factory::gui::CheckBoxGnomeWidget::draw() {
 
     std::cout << "factory::gui::CheckBoxGnomeWidget{ gnomeVersion: " << gnomeVersion << " }" << std::endl;
 }
-
