@@ -425,7 +425,7 @@ static void Small_multimapEmpty(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_multimapEmpty)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Small_multimapEmpty)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
 static void Small_multimapSize(State& state) {
 
@@ -449,7 +449,7 @@ static void Small_multimapSize(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_multimapSize)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Small_multimapSize)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
 static void Small_multimapMaxSize(State& state) {
 
@@ -473,7 +473,7 @@ static void Small_multimapMaxSize(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_multimapMaxSize)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Small_multimapMaxSize)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
 static void Small_multimapInsertN(State& state) {
 
@@ -494,7 +494,7 @@ static void Small_multimapInsertN(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_multimapInsertN)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Small_multimapInsertN)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
 static void Small_multimapClear(State& state) {  // NlogN zamiast N przez wstawianie elementow - trzeba odjac (baseline)
 
@@ -517,7 +517,7 @@ static void Small_multimapClear(State& state) {  // NlogN zamiast N przez wstawi
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_multimapClear)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Small_multimapClear)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
 static void Small_multimapInsertErase(State& state) { // TODO Dla .randomized daje O(1) zamiast O(logN), dlaczego ?????
 
@@ -543,7 +543,7 @@ static void Small_multimapInsertErase(State& state) { // TODO Dla .randomized da
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_multimapInsertErase)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Small_multimapInsertErase)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
 static void Small_multimapSwap(State& state) {
 
@@ -570,9 +570,9 @@ static void Small_multimapSwap(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_multimapSwap)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Small_multimapSwap)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
-static void Small_multimapCount(State& state) { // TODO Dla zasiegu wiekszego niz (1u, 1u << 14u) zlozonosc wieksza niz O(logN) DLACZEGO ??????????
+static void Small_multimapCount(State& state) {
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
@@ -625,7 +625,7 @@ static void Small_multimapFind(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_multimapFind)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Small_multimapFind)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
 static void Small_multimapEqualRange(State& state) {
 
@@ -652,7 +652,7 @@ static void Small_multimapEqualRange(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_multimapEqualRange)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Small_multimapEqualRange)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
 static void Small_multimapLowerBound(State& state) {
 
@@ -679,7 +679,7 @@ static void Small_multimapLowerBound(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_multimapLowerBound)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Small_multimapLowerBound)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
 static void Small_multimapUpperBound(State& state) {
 
@@ -706,7 +706,7 @@ static void Small_multimapUpperBound(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_multimapUpperBound)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Small_multimapUpperBound)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
 
 

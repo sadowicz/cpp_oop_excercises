@@ -403,16 +403,16 @@ BENCHMARK(Medium_forwardListRemoveIf)->RangeMultiplier(2)->Range(1u, 1u << 14u)-
 // MULTIMAP BENCHMARKS  ===============================================================================================
 
 
-/*
-static void Small_multimapEmpty(State& state) {
+
+static void Medium_multimapEmpty(State& state) {
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
 
-    std::multimap<Small, int> multimap{};
+    std::multimap<Medium, int> multimap{};
 
     for(std::size_t i = 0; i < size; i++) {
-        Small inserted{};
+        Medium inserted{};
         inserted.randomize();
         multimap.insert({ inserted, i });
     }
@@ -426,17 +426,17 @@ static void Small_multimapEmpty(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_multimapEmpty)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_multimapEmpty)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
-static void Small_multimapSize(State& state) {
+static void Medium_multimapSize(State& state) {
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
 
-    std::multimap<Small, int> multimap{};
+    std::multimap<Medium, int> multimap{};
 
     for(std::size_t i = 0; i < size; i++) {
-        Small inserted{};
+        Medium inserted{};
         inserted.randomize();
         multimap.insert({ inserted, i });
     }
@@ -450,17 +450,17 @@ static void Small_multimapSize(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_multimapSize)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_multimapSize)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
-static void Small_multimapMaxSize(State& state) {
+static void Medium_multimapMaxSize(State& state) {
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
 
-    std::multimap<Small, int> multimap{};
+    std::multimap<Medium, int> multimap{};
 
     for(std::size_t i = 0; i < size; i++) {
-        Small inserted{};
+        Medium inserted{};
         inserted.randomize();
         multimap.insert({ inserted, i });
     }
@@ -474,19 +474,19 @@ static void Small_multimapMaxSize(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_multimapMaxSize)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_multimapMaxSize)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
-static void Small_multimapInsertN(State& state) {
+static void Medium_multimapInsertN(State& state) {
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
 
     for(auto _ : state) {
 
-        std::multimap<Small, int> multimap{};
+        std::multimap<Medium, int> multimap{};
 
         for(std::size_t i = 0; i < size; i++) {
-            Small inserted{};
+            Medium inserted{};
             inserted.randomize();
             multimap.insert({ inserted, i });
         }
@@ -495,19 +495,19 @@ static void Small_multimapInsertN(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_multimapInsertN)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_multimapInsertN)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
-static void Small_multimapClear(State& state) {  // NlogN zamiast N przez wstawianie elementow - trzeba odjac (baseline)
+static void Medium_multimapClear(State& state) {  //trzeba odjac (baseline) InsertN
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
 
     for(auto _ : state) {
 
-        std::multimap<Small, int> multimap{};
+        std::multimap<Medium, int> multimap{};
 
         for(std::size_t i = 0; i < size; i++) {
-            Small inserted{};
+            Medium inserted{};
             inserted.randomize();
             multimap.insert({ inserted, i });
         }
@@ -518,24 +518,24 @@ static void Small_multimapClear(State& state) {  // NlogN zamiast N przez wstawi
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_multimapClear)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_multimapClear)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
-static void Small_multimapInsertErase(State& state) { // TODO Dla .randomized daje O(1) zamiast O(logN), dlaczego ?????
+static void Medium_multimapInsertErase(State& state) { // TODO Dla .randomized daje O(1) zamiast O(logN), dlaczego ?????
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
 
-    std::multimap<Small, int> multimap{};
+    std::multimap<Medium, int> multimap{};
 
     for(std::size_t i = 0; i < size; i++) {
-        Small inserted{};
+        Medium inserted{};
         inserted.randomize();
         multimap.insert({ inserted, i });
     }
 
     for(auto _ : state) {
 
-        Small inserted{};
+        Medium inserted{};
         inserted.randomize();  // brak wplywu na zlozonosc
         multimap.insert({ inserted, 0 });
         multimap.erase(inserted);
@@ -544,19 +544,19 @@ static void Small_multimapInsertErase(State& state) { // TODO Dla .randomized da
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_multimapInsertErase)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_multimapInsertErase)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
-static void Small_multimapSwap(State& state) {
+static void Medium_multimapSwap(State& state) {
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
 
-    std::multimap<Small, int> multimap1{};
-    std::multimap<Small, int> multimap2{};
+    std::multimap<Medium, int> multimap1{};
+    std::multimap<Medium, int> multimap2{};
 
     for(std::size_t i = 0; i < size; i++) {
-        Small inserted1{};
-        Small inserted2{};
+        Medium inserted1{};
+        Medium inserted2{};
         inserted1.randomize();
         inserted2.randomize();
         multimap1.insert({ inserted1, i });
@@ -571,26 +571,26 @@ static void Small_multimapSwap(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_multimapSwap)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_multimapSwap)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
-static void Small_multimapCount(State& state) { // TODO Dla zasiegu wiekszego niz (1u, 1u << 14u) zlozonosc wieksza niz O(logN) DLACZEGO ??????????
+static void Medium_multimapCount(State& state) {    // TODO Dlaczego wychodzi O(1) ?????
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
 
-    std::multimap<Small, int> multimap{};
+    std::multimap<Medium, int> multimap{};
 
 
     for(std::size_t i = 0; i < size; i++) {
 
-        Small inserted{};
+        Medium inserted{};
         inserted.randomize();
         multimap.insert({ inserted, i });
     }
 
     for(auto _ : state) {
 
-        Small counted{};
+        Medium counted{};
         counted.randomize();    // nie ma wplywu na zlozonosc
 
         multimap.count(counted);
@@ -599,23 +599,23 @@ static void Small_multimapCount(State& state) { // TODO Dla zasiegu wiekszego ni
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_multimapCount)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
+BENCHMARK(Medium_multimapCount)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
-static void Small_multimapFind(State& state) {
+static void Medium_multimapFind(State& state) {
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
 
-    std::multimap<Small, int> multimap{};
+    std::multimap<Medium, int> multimap{};
 
     for(std::size_t i = 0; i < size; i++) {
 
-        Small inserted{};
+        Medium inserted{};
         inserted.randomize();
         multimap.insert({ inserted, i });
     }
 
-    Small searched{};
+    Medium searched{};
     searched.randomize();
 
     for(auto _ : state) {
@@ -626,23 +626,23 @@ static void Small_multimapFind(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_multimapFind)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_multimapFind)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
-static void Small_multimapEqualRange(State& state) {
+static void Medium_multimapEqualRange(State& state) {
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
 
-    std::multimap<Small, int> multimap{};
+    std::multimap<Medium, int> multimap{};
 
     for(std::size_t i = 0; i < size; i++) {
 
-        Small inserted{};
+        Medium inserted{};
         inserted.randomize();
         multimap.insert({ inserted, i });
     }
 
-    Small searched{};
+    Medium searched{};
     searched.randomize();
 
     for(auto _ : state) {
@@ -653,23 +653,23 @@ static void Small_multimapEqualRange(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_multimapEqualRange)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_multimapEqualRange)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
-static void Small_multimapLowerBound(State& state) {
+static void Medium_multimapLowerBound(State& state) {
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
 
-    std::multimap<Small, int> multimap{};
+    std::multimap<Medium, int> multimap{};
 
     for(std::size_t i = 0; i < size; i++) {
 
-        Small inserted{};
+        Medium inserted{};
         inserted.randomize();
         multimap.insert({ inserted, i });
     }
 
-    Small searched{};
+    Medium searched{};
     searched.randomize();
 
     for(auto _ : state) {
@@ -680,23 +680,23 @@ static void Small_multimapLowerBound(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_multimapLowerBound)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_multimapLowerBound)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
-static void Small_multimapUpperBound(State& state) {
+static void Medium_multimapUpperBound(State& state) {
 
     auto N = state.range(0);
     auto size = (std::size_t)N;
 
-    std::multimap<Small, int> multimap{};
+    std::multimap<Medium, int> multimap{};
 
     for(std::size_t i = 0; i < size; i++) {
 
-        Small inserted{};
+        Medium inserted{};
         inserted.randomize();
         multimap.insert({ inserted, i });
     }
 
-    Small searched{};
+    Medium searched{};
     searched.randomize();
 
     for(auto _ : state) {
@@ -707,9 +707,9 @@ static void Small_multimapUpperBound(State& state) {
     state.SetComplexityN(N);
 }
 
-BENCHMARK(Small_multimapUpperBound)->RangeMultiplier(2)->Range(1u, 1u << 16u)->Complexity();
+BENCHMARK(Medium_multimapUpperBound)->RangeMultiplier(2)->Range(1u, 1u << 14u)->Complexity();
 
-
+/*
 
 //  UNORDERED MULTIMAP BENCHMARK    ====================================================================================
 
