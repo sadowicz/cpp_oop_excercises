@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdexcept>
 #include "Observer.h"
 
 namespace observer {

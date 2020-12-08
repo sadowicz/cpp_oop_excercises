@@ -2,10 +2,12 @@
 
 float observer::Acceleration::get() const {
 
-    float acceleration = 0;
+    float acceleration;
 
     if(hasThirdValue)
         acceleration = (thirdValue - secondValue) - (secondValue - firstValue);
+    else
+        throw std::logic_error{ "Acceleration::get : Not enough values too calculate acceleration" };
 
     return acceleration;
 }
