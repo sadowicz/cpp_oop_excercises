@@ -35,7 +35,21 @@ add_library(utils
         include/factory/gui/GnomeWidgetFactory.h
         src/factory/gui/GnomeWidgetFactory.cpp
         include/factory/gui/Demo.h
-        src/factory/gui/Demo.cpp)
+        src/factory/gui/Demo.cpp
+
+        include/factory/executor/Core.h
+        include/factory/executor/AnisotropicCudaCore.h
+        src/factory/executor/AnisotropicCudaCore.cpp
+        include/factory/executor/ElasticCudaCore.h
+        src/factory/executor/ElasticCudaCore.cpp
+        include/factory/executor/AcousticCudaCore.h
+        src/factory/executor/AcousticCudaCore.cpp
+        include/factory/executor/AnisotropicCpuCore.h
+        src/factory/executor/AnisotropicCpuCore.cpp
+        include/factory/executor/ElasticCpuCore.h
+        src/factory/executor/ElasticCpuCore.cpp
+        include/factory/executor/AcousticCpuCore.h
+        src/factory/executor/AcousticCpuCore.cpp)
 
 target_include_directories(utils PUBLIC include)
 
