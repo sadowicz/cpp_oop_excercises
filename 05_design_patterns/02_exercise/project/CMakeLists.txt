@@ -49,7 +49,12 @@ add_library(utils
         include/factory/executor/ElasticCpuCore.h
         src/factory/executor/ElasticCpuCore.cpp
         include/factory/executor/AcousticCpuCore.h
-        src/factory/executor/AcousticCpuCore.cpp)
+        src/factory/executor/AcousticCpuCore.cpp
+        include/factory/executor/CoreFactory.h
+        include/factory/executor/CudaCoreFactory.h
+        src/factory/executor/CudaCoreFactory.cpp
+        include/factory/executor/CpuCoreFactory.h
+        src/factory/executor/CpuCoreFactory.cpp)
 
 target_include_directories(utils PUBLIC include)
 
