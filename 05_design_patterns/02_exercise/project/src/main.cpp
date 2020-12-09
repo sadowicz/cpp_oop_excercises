@@ -1,9 +1,9 @@
 #include <iostream>
 #include "Calculator.h"
 
-//#include "factory/executor/CpuCoreFactory.h"
-//#include "factory/executor/CudaCoreFactory.h"
-//#include "factory/executor/Demo.h"
+#include "factory/executor/CpuCoreFactory.h"
+#include "factory/executor/CudaCoreFactory.h"
+#include "factory/executor/Demo.h"
 
 #include "factory/gui/GnomeWidgetFactory.h"
 #include "factory/gui/KdeWidgetFactory.h"
@@ -20,24 +20,24 @@ int main()
     std::cout << "Sum: " << calculator.add() << std::endl;
 
 
-//    {
-//        auto factory = std::make_shared<factory::executor::CpuCoreFactory>(10);
-//        auto demo = std::make_shared<factory::executor::Demo>(factory);
-//
-//        demo->run("acoustic");
-//        demo->run("elastic");
-//        demo->run("anisotropic");
-//    }
-//
-//    {
-//        auto factory = std::make_shared<factory::executor::CudaCoreFactory>(1);
-//        auto demo = std::make_shared<factory::executor::Demo>(factory);
-//
-//        demo->run("acoustic");
-//        demo->run("elastic");
-//        demo->run("anisotropic");
-//    }
-//
+    {
+        auto factory = std::make_shared<factory::executor::CpuCoreFactory>(10);
+        auto demo = std::make_shared<factory::executor::Demo>(factory);
+
+        demo->run("acoustic");
+        demo->run("elastic");
+        demo->run("anisotropic");
+    }
+
+    {
+        auto factory = std::make_shared<factory::executor::CudaCoreFactory>(1);
+        auto demo = std::make_shared<factory::executor::Demo>(factory);
+
+        demo->run("acoustic");
+        demo->run("elastic");
+        demo->run("anisotropic");
+    }
+
     {
         auto factory = std::make_shared<factory::gui::GnomeWidgetFactory>(2);
         auto demo = std::make_shared<factory::gui::Demo>(factory);

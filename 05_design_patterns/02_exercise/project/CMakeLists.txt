@@ -54,7 +54,9 @@ add_library(utils
         include/factory/executor/CudaCoreFactory.h
         src/factory/executor/CudaCoreFactory.cpp
         include/factory/executor/CpuCoreFactory.h
-        src/factory/executor/CpuCoreFactory.cpp)
+        src/factory/executor/CpuCoreFactory.cpp
+        include/factory/executor/Demo.h
+        src/factory/executor/Demo.cpp)
 
 target_include_directories(utils PUBLIC include)
 
