@@ -46,7 +46,7 @@ Testowane obiekty nie powinny być inicjalizowane losowymi wartościami. Uniemo�
 
 ## 3. Benchmarki dla operatorów i funkcji haszujących
 ### Wstęp
-Do napisania mikro-benchmarków użyta została biblioteka benchmark autorstwa Google. Informacje o sprzęcie // TODO
+Do napisania mikro-benchmarków użyta została biblioteka benchmark pochodząca od Google. Benchmarki były uruchamiane na maszynie wirtualnej na laptopie z procesorem Intel Core i5-4200M 2 x 2.5GHz (2 rdzenie, 4 wątki) oraz z pamięcią RAM 8GB. Maszynie wirtualnej przydzielone zostało 1 CPU oraz 4GB RAM.
 ### A. Struktura benchmarku
 Benchamrk działa na zasadzie rejestracji funkcji wewnątrz makra `BENCHMARK(...)`. Funkcja ta jest typu `static void` i jako argument przyjmuje referencję do obiektu klasy `State`. Wewnątrz ciała funkcji, najpierw mają miejsce inicjalizacje zmiennych i obiektów, które mają mieć miejsce tylko raz dla danego wywołania funkcji. Dalej znajduje się pętla `for(auto _ : state) {...}`, wewnątrz której znajdują się instrukcje, które mają zostać wykonane określoną ilość iteracji, i których czasy wykonania są mierzone podczas każdej iteracji pętli. W przypadku benchmarków operatorów i funkcji haszujących, wewnątrz tej pętli znajdują się jedynie wywołania operatorów lub funkcji haszujących.
 
