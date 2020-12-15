@@ -3,12 +3,11 @@
 class Time {
 public:
 
-    void create(bool endless);
-    long long now() const;
+    virtual ~Time() = default;
 
-    void flow();
+    virtual void create(bool endless) = 0;
+    virtual long long now() const = 0;
 
-private:
-    long long year;
-    bool endless;
+    virtual void flow() = 0;
+
 };
