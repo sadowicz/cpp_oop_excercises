@@ -1,6 +1,7 @@
 #include "Universe.h"
 #include "SpaceMock.h"
 #include "ObserverMock.h"
+#include "TimeMock.h"
 #include "TestIncludes.h"
 
 class Socket {

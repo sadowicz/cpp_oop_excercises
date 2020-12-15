@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 
 add_executable(tests
-        src/UniverseTest.cpp include/SpaceMock.h include/ObserverMock.h)
+        src/UniverseTest.cpp include/SpaceMock.h include/ObserverMock.h include/TimeMock.h)
 
 target_link_libraries(tests PRIVATE utils)
 target_include_directories(tests PRIVATE include)
