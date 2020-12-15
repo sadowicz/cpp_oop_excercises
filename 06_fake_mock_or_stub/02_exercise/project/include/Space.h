@@ -1,9 +1,5 @@
 #pragma once
 
-#include "Point.h"
-
-#include <vector>
-
 class Space {
 public:
 
