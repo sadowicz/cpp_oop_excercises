@@ -3,7 +3,7 @@
 #include "Universe.h"
 
 #include "Time.h"
-#include "Space.h"
+#include "SpaceImpl.h"
 #include "Observer.h"
 
 int main() {
@@ -22,7 +22,7 @@ int main() {
     std::cout << "Whatever..." << std::endl;
 
     Time time{};
-    Space space{};
+    SpaceImpl space{};
     Observer observer{};
 
     Universe universe{time, space, observer};

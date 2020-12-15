@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Time.h"
-#include "Space.h"
+#include "SpaceImpl.h"
 #include "Observer.h"
 
 class Universe {
