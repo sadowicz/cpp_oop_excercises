@@ -1,13 +1,11 @@
 #pragma once
 
-#include <map>
-
 class Observer {
 public:
 
-    void remember(std::string question, std::string answer);
-    std::string answer(std::string question) const;
+    virtual ~Observer() = default;
 
-private:
-    std::map<std::string, std::string> answers;
+    virtual void remember(std::string question, std::string answer) = 0;
+    virtual std::string answer(std::string question) const = 0;
+
 };

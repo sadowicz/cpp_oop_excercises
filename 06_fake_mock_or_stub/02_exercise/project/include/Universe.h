@@ -2,7 +2,7 @@
 
 #include "Time.h"
 #include "SpaceImpl.h"
-#include "Observer.h"
+#include "ObserverImpl.h"
 
 class Universe {
 public:
