@@ -114,3 +114,22 @@ TEST(Universe, Simulate_EarthAppearsAt9300000000)
 
     observer.answer("Is there planet Earth?");
 }
+
+TEST(Universe, Simulate_NoLifeBefore9900000000)
+{
+    NiceMock<TimeMock> time{};
+    NiceMock<SpaceMock> space{};
+    NiceMock<ObserverMock> observer{};
+
+    Universe universe{time, space, observer};
+
+    universe.create();
+
+    EXPECT_CALL(time, now()).WillOnce(Return(9899999999));
+
+    universe.simulate(9899999999);
+
+    EXPECT_CALL(observer, answer("Does life exist?")).WillOnce(Return("I do not know..."));
+
+    observer.answer("Does life exist?");
+}
