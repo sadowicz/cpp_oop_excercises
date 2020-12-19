@@ -60,7 +60,7 @@ TEST(Universe, Constructor)
 
 TEST(Universe, Create_RemembersCorrectNumberOfDimensions)
 {
-    TimeMock time{};
+    NiceMock<TimeMock> time{};
     SpaceMock space{};
     ObserverMock observer{};
 
@@ -75,4 +75,23 @@ TEST(Universe, Create_RemembersCorrectNumberOfDimensions)
     EXPECT_CALL(observer, answer("How many dimensions there are?")).WillOnce(Return("11"));
 
     observer.answer("How many dimensions there are?");
+}
+
+TEST(Universe, Simulate_NoEarthBefore9300000000)
+{
+    NiceMock<TimeMock> time{};
+    NiceMock<SpaceMock> space{};
+    NiceMock<ObserverMock> observer{};
+
+    Universe universe{time, space, observer};
+
+    universe.create();
+
+    EXPECT_CALL(time, now()).WillOnce(Return(9299999999));
+
+    universe.simulate(9299999999);
+
+    EXPECT_CALL(observer, answer("Is there planet Earth?")).WillOnce(Return("I do not know..."));
+
+    observer.answer("Is there planet Earth?");
 }
