@@ -95,3 +95,22 @@ TEST(Universe, Simulate_NoEarthBefore9300000000)
 
     observer.answer("Is there planet Earth?");
 }
+
+TEST(Universe, Simulate_EarthAppearsAt9300000000)
+{
+    NiceMock<TimeMock> time{};
+    NiceMock<SpaceMock> space{};
+    NiceMock<ObserverMock> observer{};
+
+    Universe universe{time, space, observer};
+
+    universe.create();
+
+    EXPECT_CALL(time, now()).WillOnce(Return(9300000000));
+
+    universe.simulate(9300000000);
+
+    EXPECT_CALL(observer, answer("Is there planet Earth?")).WillOnce(Return("Yes!"));
+
+    observer.answer("Is there planet Earth?");
+}
