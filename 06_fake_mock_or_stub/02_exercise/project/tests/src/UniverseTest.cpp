@@ -152,3 +152,22 @@ TEST(Universe, Simulate_LifeAppearsAt9900000000)
 
     observer.answer("Does life exist?");
 }
+
+TEST(Universe, Simulate_NoPeopleBefore13800000000)
+{
+    NiceMock<TimeMock> time{};
+    NiceMock<SpaceMock> space{};
+    NiceMock<ObserverMock> observer{};
+
+    Universe universe{time, space, observer};
+
+    universe.create();
+
+    EXPECT_CALL(time, now()).WillOnce(Return(13799999999));
+
+    universe.simulate(13799999999);
+
+    EXPECT_CALL(observer, answer("Have People evolved?")).WillOnce(Return("I do not know..."));
+
+    observer.answer("Have People evolved?");
+}
