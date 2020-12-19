@@ -49,7 +49,30 @@ TEST(Socket, SendAndReceive) {
     server.run();
 }
 
-TEST(Universe, Create)
+TEST(Universe, Constructor)
 {
-    // TODO: Test Universe class...
+    TimeMock time{};
+    SpaceMock space{};
+    ObserverMock observer{};
+
+    Universe universe{time, space, observer};
+}
+
+TEST(Universe, Create_RemembersCorrectNumberOfDimensions)
+{
+    TimeMock time{};
+    SpaceMock space{};
+    ObserverMock observer{};
+
+    Universe universe{time, space, observer};
+
+    EXPECT_CALL(space, create(11));
+    EXPECT_CALL(space, dimensions).WillOnce(Return(11));
+    EXPECT_CALL(observer, remember("How many dimensions there are?", std::to_string(11)));
+
+    universe.create();
+
+    EXPECT_CALL(observer, answer("How many dimensions there are?")).WillOnce(Return("11"));
+
+    observer.answer("How many dimensions there are?");
 }
