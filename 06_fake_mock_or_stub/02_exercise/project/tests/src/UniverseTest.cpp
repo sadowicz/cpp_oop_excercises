@@ -61,7 +61,7 @@ TEST(Universe, Constructor)
 TEST(Universe, Create_RemembersCorrectNumberOfDimensions)
 {
     NiceMock<TimeMock> time{};
-    SpaceMock space{};
+    NiceMock<SpaceMock> space{};
     ObserverMock observer{};
 
     Universe universe{time, space, observer};
@@ -71,10 +71,6 @@ TEST(Universe, Create_RemembersCorrectNumberOfDimensions)
     EXPECT_CALL(observer, remember("How many dimensions there are?", std::to_string(11)));
 
     universe.create();
-
-    EXPECT_CALL(observer, answer("How many dimensions there are?")).WillOnce(Return("11"));
-
-    observer.answer("How many dimensions there are?");
 }
 
 TEST(Universe, Simulate_NoEarthBefore9300000000)
@@ -87,13 +83,14 @@ TEST(Universe, Simulate_NoEarthBefore9300000000)
 
     universe.create();
 
-    EXPECT_CALL(time, now()).WillOnce(Return(9299999999));
+    EXPECT_CALL(time, now())
+            .WillOnce(Return(9299999999))
+            .WillOnce(Return(9300000000));
 
-    universe.simulate(9299999999);
+    EXPECT_CALL(observer, remember("Is there planet Earth?", "Yes!"))
+        .Times(0);
 
-    EXPECT_CALL(observer, answer("Is there planet Earth?")).WillOnce(Return("I do not know..."));
-
-    observer.answer("Is there planet Earth?");
+    universe.simulate(9300000000);
 }
 
 TEST(Universe, Simulate_EarthAppearsAt9300000000)
@@ -106,13 +103,13 @@ TEST(Universe, Simulate_EarthAppearsAt9300000000)
 
     universe.create();
 
-    EXPECT_CALL(time, now()).WillOnce(Return(9300000000));
+    EXPECT_CALL(time, now())
+            .WillOnce(Return(9300000000))
+            .WillOnce(Return(9300000001));
 
-    universe.simulate(9300000000);
+    EXPECT_CALL(observer, remember("Is there planet Earth?", "Yes!"));
 
-    EXPECT_CALL(observer, answer("Is there planet Earth?")).WillOnce(Return("Yes!"));
-
-    observer.answer("Is there planet Earth?");
+    universe.simulate(9300000001);
 }
 
 TEST(Universe, Simulate_NoLifeBefore9900000000)
@@ -125,13 +122,14 @@ TEST(Universe, Simulate_NoLifeBefore9900000000)
 
     universe.create();
 
-    EXPECT_CALL(time, now()).WillOnce(Return(9899999999));
+    EXPECT_CALL(time, now())
+            .WillOnce(Return(9899999999))
+            .WillOnce(Return(9900000000));
 
-    universe.simulate(9899999999);
+    EXPECT_CALL(observer, remember("Does life exist?", "Yes!"))
+        .Times(0);
 
-    EXPECT_CALL(observer, answer("Does life exist?")).WillOnce(Return("I do not know..."));
-
-    observer.answer("Does life exist?");
+    universe.simulate(9900000000);
 }
 
 TEST(Universe, Simulate_LifeAppearsAt9900000000)
@@ -144,13 +142,13 @@ TEST(Universe, Simulate_LifeAppearsAt9900000000)
 
     universe.create();
 
-    EXPECT_CALL(time, now()).WillOnce(Return(9900000000));
+    EXPECT_CALL(time, now())
+            .WillOnce(Return(9900000000))
+            .WillOnce(Return(9900000001));
 
-    universe.simulate(9900000000);
+    EXPECT_CALL(observer, remember("Does life exist?", "Yes!"));
 
-    EXPECT_CALL(observer, answer("Does life exist?")).WillOnce(Return("Yes!"));
-
-    observer.answer("Does life exist?");
+    universe.simulate(9900000001);
 }
 
 TEST(Universe, Simulate_NoPeopleBefore13800000000)
@@ -163,13 +161,15 @@ TEST(Universe, Simulate_NoPeopleBefore13800000000)
 
     universe.create();
 
-    EXPECT_CALL(time, now()).WillOnce(Return(13799999999));
+    EXPECT_CALL(time, now())
+        .WillOnce(Return(13799999999))
+        .WillOnce(Return(13800000000));
 
-    universe.simulate(13799999999);
+    EXPECT_CALL(observer, remember("Have People evolved?", "Yes!"))
+        .Times(0);
 
-    EXPECT_CALL(observer, answer("Have People evolved?")).WillOnce(Return("I do not know..."));
+    universe.simulate(13800000000);
 
-    observer.answer("Have People evolved?");
 }
 
 TEST(Universe, Simulate_PeopleAppearAt13800000000)
@@ -182,11 +182,11 @@ TEST(Universe, Simulate_PeopleAppearAt13800000000)
 
     universe.create();
 
-    EXPECT_CALL(time, now()).WillOnce(Return(13800000000));
+    EXPECT_CALL(time, now())
+        .WillOnce(Return(13800000000))
+        .WillOnce(Return(138000000001));
 
-    universe.simulate(13800000000);
+    EXPECT_CALL(observer, remember("Have People evolved?", "Yes!"));
 
-    EXPECT_CALL(observer, answer("Have People evolved?")).WillOnce(Return("Yes!"));
-
-    observer.answer("Have People evolved?");
+    universe.simulate(138000000001);
 }
