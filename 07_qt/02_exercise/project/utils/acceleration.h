@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-class Acceleration
+class Acceleration : public QObject
 {
     Q_OBJECT
 public:

@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-class Displacement
+class Displacement : public QObject
 {
     Q_OBJECT
 public:
