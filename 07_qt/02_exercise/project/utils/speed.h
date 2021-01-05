@@ -14,6 +14,11 @@ private:
     bool hasSecondValue{};
     float firstValue{};
     float secondValue{};
+
+signals:
+public slots:
+
+    void notify(float value);
 };
 
 #endif // SPEED_H

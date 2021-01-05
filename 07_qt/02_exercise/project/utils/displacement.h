@@ -11,6 +11,10 @@ public:
 
 private:
     float value{};
+
+signals:
+    void sendVal(float value);
+
 };
 
 #endif // DISPLACEMENT_H
