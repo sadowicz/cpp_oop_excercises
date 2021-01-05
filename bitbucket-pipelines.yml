@@ -4,16 +4,19 @@ pipelines:
   default:
     - step:
         script:
-          - pushd 06_fake_mock_or_stub/02_exercise/
-          -   git clone --depth=1 --branch=release-1.10.0 https://github.com/google/googletest.git
-          -   rm -rf googletest/.git
-          -   pushd googletest && mkdir build && pushd build
-          -       cmake ../ && make -j4
-          -   popd && popd
-          -   pushd project && mkdir build && pushd build
-          -       cmake ../ && make -j4
-          -       ./runner
-          -       tests/tests --gtest_output=xml
-          -   popd && popd
+          - pushd 07_qt/02_exercise/
+          -   mkdir build-project && pushd build-project
+          -     qmake ../project
+          -     make -j4
+          -     pushd tests/speed
+          -       LD_LIBRARY_PATH=../../utils ./speed -o test_detail.xml,xunitxml
+          -     popd
+          -     pushd tests/acceleration
+          -       LD_LIBRARY_PATH=../../utils ./acceleration -o test_detail.xml,xunitxml
+          -     popd
+          -     pushd tests/displacement
+          -       LD_LIBRARY_PATH=../../utils ./displacement -o test_detail.xml,xunitxml
+          -     popd
+          -   popd
           - popd
           - .ci/collect_reports.sh
