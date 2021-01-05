@@ -3,6 +3,10 @@
 
 #include "utils_global.h"
 
+#include "displacement.h"
+#include "speed.h"
+#include "acceleration.h"
+
 class UTILS_EXPORT Utils
 {
 public:

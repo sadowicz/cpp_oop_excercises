@@ -1,0 +1,16 @@
+#ifndef DISPLACEMENT_H
+#define DISPLACEMENT_H
+
+#include <QObject>
+
+class Displacement
+{
+    Q_OBJECT
+public:
+    void set(float value);
+
+private:
+    float value{};
+};
+
+#endif // DISPLACEMENT_H
