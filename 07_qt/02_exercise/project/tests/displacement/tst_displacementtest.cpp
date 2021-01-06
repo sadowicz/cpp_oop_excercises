@@ -12,23 +12,25 @@ public:
     ~DisplacementTest();
 
 private slots:
-    void test_case1();
+    void displacementIsCreateable();
+    void canSetDisplacementValue();
 
 };
 
-DisplacementTest::DisplacementTest()
-{
+DisplacementTest::DisplacementTest() {}
 
+DisplacementTest::~DisplacementTest() {}
+
+void DisplacementTest::displacementIsCreateable()
+{
+    Displacement displacement{};
 }
 
-DisplacementTest::~DisplacementTest()
+void DisplacementTest::canSetDisplacementValue()
 {
+    Displacement displacement{};
 
-}
-
-void DisplacementTest::test_case1()
-{
-
+    displacement.set(11.7);
 }
 
 QTEST_APPLESS_MAIN(DisplacementTest)
