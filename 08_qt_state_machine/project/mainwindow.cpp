@@ -27,7 +27,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     auto Locked = new QState{ stateMachine };
 
-    // TODO: Set appropriate 'assignProperty'
+    // Set appropriate 'assignProperty'
     Unlocked->assignProperty(ui->pbToggle, "text", "Lock");
     Unlocked->assignProperty(ui->pbOpen, "enabled", true);
     Unlocked->assignProperty(ui->pbSave, "enabled", true);
@@ -68,16 +68,40 @@ MainWindow::~MainWindow()
 
 void MainWindow::open()
 {
-    // TODO: Show file dialog
-    // TODO: Open selected file
-    // TODO: Emit 'error' if opening failed
-    // TODO: Set text and emit 'opened' if suceeded
-    // TODO: Save file name in 'fileName'
+    // Show file dialog & Save file name in 'fileName'
+    auto name = QFileDialog::getOpenFileName(this, tr("Open file"), "/home/student");
+
+    // Open selected file
+    QFile file{ name };
+    if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        // Emit 'error' if opening failed
+        emit error();
+    }
+    else {
+        // Set text and emit 'opened' if suceeded
+        auto content = file.readAll();
+        QString text{ content };
+
+        ui->teText->setPlaceholderText(text);
+        emit opened();
+    }
+
+    // Save file name in 'fileName'
+    this->fileName = name;
+    file.close();
 }
 
 void MainWindow::save()
 {
     // TODO: Open 'fileName' for writing
-    // TODO: Emit 'error' if opening failed
-    // TODO: Save file and emit 'saved' if succeeded
+    QFile file{ this->fileName };
+    if(!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        // Emit 'error' if opening failed
+        emit error();
+    }
+    else {
+        // Save file and emit 'saved' if succeeded
+        file.write(ui->teText->placeholderText().toUtf8());
+        emit saved();
+    }
 }
