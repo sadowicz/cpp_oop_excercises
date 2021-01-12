@@ -4,19 +4,10 @@ pipelines:
   default:
     - step:
         script:
-          - pushd 07_qt/02_exercise/
+          - pushd 08_qt_state_machine/
           -   mkdir build-project && pushd build-project
           -     qmake ../project
-          -     make -j4
-          -     pushd tests/speed
-          -       LD_LIBRARY_PATH=../../utils ./speed -o test_detail.xml,xunitxml
-          -     popd
-          -     pushd tests/acceleration
-          -       LD_LIBRARY_PATH=../../utils ./acceleration -o test_detail.xml,xunitxml
-          -     popd
-          -     pushd tests/displacement
-          -       LD_LIBRARY_PATH=../../utils ./displacement -o test_detail.xml,xunitxml
-          -     popd
+          -     make -j4 
           -   popd
           - popd
           - .ci/collect_reports.sh
