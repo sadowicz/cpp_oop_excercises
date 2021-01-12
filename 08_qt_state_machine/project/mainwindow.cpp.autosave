@@ -27,7 +27,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     auto Locked = new QState{ stateMachine };
 
-    // TODO: Set appropriate 'assignProperty'
+    // Set appropriate 'assignProperty'
     Unlocked->assignProperty(ui->pbToggle, "text", "Lock");
     Unlocked->assignProperty(ui->pbOpen, "enabled", true);
     Unlocked->assignProperty(ui->pbSave, "enabled", true);
