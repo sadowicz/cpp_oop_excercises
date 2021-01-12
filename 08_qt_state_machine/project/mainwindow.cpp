@@ -24,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     auto Edit = new QState{ Unlocked };
     auto Save = new QState{ Unlocked };
     auto Error = new QState{ Unlocked };
+    auto History = new QHistoryState{ Unlocked };
 
     auto Locked = new QState{ stateMachine };
 
@@ -57,8 +58,34 @@ MainWindow::MainWindow(QWidget *parent) :
     Locked->assignProperty(ui->teText, "enabled", false);
 
     // TODO: Set state transitions including this class events and slots
-    // TODO: Set initial state
-    // TODO: Start state machine
+    Unlocked->addTransition(ui->pbToggle, SIGNAL(clicked()), Locked);
+
+    Startup->addTransition(ui->pbOpen, SIGNAL(clicked()), Open);
+
+    connect(Open, SIGNAL(entered()), this, SLOT(open()));
+    Open->addTransition(this, SIGNAL(error()), Error);
+    Open->addTransition(this, SIGNAL(opened()), View);
+
+    View->addTransition(ui->pbOpen, SIGNAL(clicked()), Open);
+    View->addTransition(ui->teText, SIGNAL(textChanged()), Edit);
+
+    Edit->addTransition(ui->pbSave, SIGNAL(clicked()), Save);
+
+    connect(Save, SIGNAL(entered()), this, SLOT(save()));
+    Save->addTransition(this, SIGNAL(error()), Error);
+    Save->addTransition(this, SIGNAL(saved()), View);
+
+    Error->addTransition(ui->pbOpen, SIGNAL(clicked()), Open);
+
+    Locked->addTransition(ui->pbToggle, SIGNAL(clicked()), Unlocked);
+
+    // Set initial state
+    History->setDefaultState(Startup);
+    Unlocked->setInitialState(History);
+    stateMachine->setInitialState(Unlocked);
+
+    // Start state machine
+    stateMachine->start();
 }
 
 MainWindow::~MainWindow()
@@ -82,7 +109,7 @@ void MainWindow::open()
         auto content = file.readAll();
         QString text{ content };
 
-        ui->teText->setPlaceholderText(text);
+        ui->teText->setText(text);
         emit opened();
     }
 
@@ -101,7 +128,9 @@ void MainWindow::save()
     }
     else {
         // Save file and emit 'saved' if succeeded
-        file.write(ui->teText->placeholderText().toUtf8());
+        file.write(ui->teText->toPlainText().toUtf8());
         emit saved();
     }
+
+    file.close();
 }
